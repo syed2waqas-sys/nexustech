@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:nexustech/view/main_screens/admin/admin_dashboard/manage_users.dart';
+
 
 class ManageProjects extends StatefulWidget {
   const ManageProjects({super.key});
@@ -9,7 +11,6 @@ class ManageProjects extends StatefulWidget {
 }
 
 class _ManageProjectsState extends State<ManageProjects> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,19 +98,31 @@ class _ManageProjectsState extends State<ManageProjects> {
 
   // Single Tab
   Widget tabItem(String title, bool isSelected) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      decoration: BoxDecoration(
-        color: isSelected ? Colors.white : Colors.transparent,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Text(
-        title,
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-          color: Colors.black,
+    return InkWell(
+      onTap: () {
+        if (!isSelected) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ManageScreen(),
+            ),
+          );
+        }
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.white : Colors.transparent,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Text(
+          title,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: isSelected ? Colors.black : Colors.black54,
+          ),
         ),
       ),
     );
