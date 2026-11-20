@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
+import 'package:nexustech/utils/app_colors.dart';
 import 'package:nexustech/view/main_screens/developer/projects/project_details_screen.dart';
+import 'package:nexustech/widgets/custom_textfield.dart';
 
 class BrowseProjects extends StatefulWidget {
   const BrowseProjects({super.key});
@@ -24,7 +25,7 @@ class _BrowseProjectsState extends State<BrowseProjects> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF7F6F2),
+      backgroundColor: AppColors.backgroundColor,
 
       body: SafeArea(
         child: SingleChildScrollView(
@@ -41,32 +42,17 @@ class _BrowseProjectsState extends State<BrowseProjects> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
+                    color: AppColors.textColor,
                   ),
                 ),
 
                 SizedBox(height: 14),
 
                 // Search Bar
-                Container(
-                  height: 42,
-                  padding: EdgeInsets.symmetric(horizontal: 12),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.blue),
-                  ),
-
-                  child: Row(
-                    children: [
-                      Icon(Icons.search, size: 16),
-                      SizedBox(width: 8),
-
-                      Text(
-                        "flutter",
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ],
-                  ),
+                CustomTextField(
+                  hintText: "Search projects",
+                  prefixIcon: Icons.search,
+                  showBorder: true,
                 ),
 
                 SizedBox(height: 10),
@@ -102,7 +88,7 @@ class _BrowseProjectsState extends State<BrowseProjects> {
                   "24 open projects, newest first",
                   style: TextStyle(
                     fontSize: 11,
-                    color: Colors.grey,
+                    color: AppColors.greyColor,
                   ),
                 ),
 
@@ -174,10 +160,14 @@ class _BrowseProjectsState extends State<BrowseProjects> {
       ),
 
       decoration: BoxDecoration(
-        color: selected ? Color(0xff3036C9) : Colors.white,
+        color: selected
+            ? AppColors.primaryColor
+            : AppColors.whiteColor,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: selected ? Color(0xff3036C9) : Colors.grey.shade400,
+          color: selected
+              ? AppColors.primaryColor
+              : AppColors.borderColor,
         ),
       ),
 
@@ -185,7 +175,9 @@ class _BrowseProjectsState extends State<BrowseProjects> {
         title,
         style: TextStyle(
           fontSize: 10,
-          color: selected ? Colors.white : Colors.black,
+          color: selected
+              ? AppColors.whiteColor
+              : AppColors.textColor,
         ),
       ),
     );
@@ -203,10 +195,10 @@ class _BrowseProjectsState extends State<BrowseProjects> {
       padding: EdgeInsets.all(12),
 
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Color(0xffE2E0DC),
+          color: AppColors.borderColor,
         ),
       ),
 
@@ -232,7 +224,10 @@ class _BrowseProjectsState extends State<BrowseProjects> {
 
                 child: Text(
                   "Mobile app",
-                  style: TextStyle(fontSize: 9),
+                  style: TextStyle(
+                    fontSize: 9,
+                    color: AppColors.textColor,
+                  ),
                 ),
               ),
 
@@ -240,7 +235,7 @@ class _BrowseProjectsState extends State<BrowseProjects> {
                 time,
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey,
+                  color: AppColors.greyColor,
                 ),
               ),
             ],
@@ -254,6 +249,7 @@ class _BrowseProjectsState extends State<BrowseProjects> {
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.bold,
+              color: AppColors.textColor,
             ),
           ),
 
@@ -266,14 +262,17 @@ class _BrowseProjectsState extends State<BrowseProjects> {
 
               Text(
                 price,
-                style: TextStyle(fontSize: 10),
+                style: TextStyle(
+                  fontSize: 10,
+                  color: AppColors.textColor,
+                ),
               ),
 
               Text(
                 proposals,
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey,
+                  color: AppColors.greyColor,
                 ),
               ),
             ],

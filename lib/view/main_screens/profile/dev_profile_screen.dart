@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:nexustech/utils/app_colors.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -7,7 +7,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF7F6F2),
+      backgroundColor: AppColors.backgroundColor,
 
       body: SafeArea(
         child: Padding(
@@ -27,6 +27,7 @@ class ProfileScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
+                      color: AppColors.textColor,
                     ),
                   ),
 
@@ -36,18 +37,25 @@ class ProfileScreen extends StatelessWidget {
                       vertical: 7,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: AppColors.whiteColor,
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.grey),
+                      border: Border.all(color: AppColors.borderColor),
                     ),
 
                     child: Row(
                       children: [
-                        Icon(Icons.edit, size: 12),
+                        Icon(
+                          Icons.edit,
+                          size: 12,
+                          color: AppColors.textColor,
+                        ),
                         SizedBox(width: 5),
                         Text(
                           "Edit",
-                          style: TextStyle(fontSize: 10),
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: AppColors.textColor,
+                          ),
                         ),
                       ],
                     ),
@@ -84,6 +92,7 @@ class ProfileScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
+                          color: AppColors.textColor,
                         ),
                       ),
 
@@ -93,7 +102,7 @@ class ProfileScreen extends StatelessWidget {
                         "hamza.raza@example.com",
                         style: TextStyle(
                           fontSize: 10,
-                          color: Colors.grey,
+                          color: AppColors.greyColor,
                         ),
                       ),
 
@@ -112,7 +121,7 @@ class ProfileScreen extends StatelessWidget {
                           "Developer",
                           style: TextStyle(
                             fontSize: 8,
-                            color: Colors.indigo,
+                            color: AppColors.primaryColor,
                           ),
                         ),
                       ),
@@ -129,6 +138,7 @@ class ProfileScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
+                  color: AppColors.textColor,
                 ),
               ),
 
@@ -140,6 +150,7 @@ class ProfileScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 11,
                   height: 1.4,
+                  color: AppColors.textColor,
                 ),
               ),
 
@@ -151,6 +162,7 @@ class ProfileScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
+                  color: AppColors.textColor,
                 ),
               ),
 
@@ -178,6 +190,7 @@ class ProfileScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
+                  color: AppColors.textColor,
                 ),
               ),
 
@@ -186,10 +199,10 @@ class ProfileScreen extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.whiteColor,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: Color(0xffE2E0DC),
+                    color: AppColors.borderColor,
                   ),
                 ),
 
@@ -199,7 +212,7 @@ class ProfileScreen extends StatelessWidget {
                     Icon(
                       Icons.code,
                       size: 16,
-                      color: Colors.indigo,
+                      color: AppColors.primaryColor,
                     ),
 
                     SizedBox(width: 8),
@@ -210,6 +223,7 @@ class ProfileScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w500,
+                          color: AppColors.textColor,
                         ),
                       ),
                     ),
@@ -217,7 +231,7 @@ class ProfileScreen extends StatelessWidget {
                     Icon(
                       Icons.arrow_forward_ios,
                       size: 12,
-                      color: Colors.grey,
+                      color: AppColors.greyColor,
                     ),
                   ],
                 ),
@@ -229,7 +243,7 @@ class ProfileScreen extends StatelessWidget {
                 "Clients open this link from your proposals to judge your work.",
                 style: TextStyle(
                   fontSize: 9,
-                  color: Colors.grey,
+                  color: AppColors.greyColor,
                 ),
               ),
 
@@ -240,9 +254,9 @@ class ProfileScreen extends StatelessWidget {
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(vertical: 12),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.whiteColor,
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.grey),
+                  border: Border.all(color: AppColors.borderColor),
                 ),
 
                 child: Center(
@@ -272,16 +286,19 @@ class ProfileScreen extends StatelessWidget {
       ),
 
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: Colors.grey.shade400,
+          color: AppColors.borderColor,
         ),
       ),
 
       child: Text(
         title,
-        style: TextStyle(fontSize: 10),
+        style: TextStyle(
+          fontSize: 10,
+          color: AppColors.textColor,
+        ),
       ),
     );
   }

@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
+import 'package:nexustech/utils/app_colors.dart';
 import 'package:nexustech/view/main_screens/admin/admin_dashboard/manage_users.dart';
-
+import 'package:nexustech/widgets/custom_textfield.dart';
 
 class ManageProjects extends StatefulWidget {
   const ManageProjects({super.key});
@@ -14,7 +14,7 @@ class _ManageProjectsState extends State<ManageProjects> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF6F4F0),
+      backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -44,7 +44,7 @@ class _ManageProjectsState extends State<ManageProjects> {
                   'Admin dashboard',
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.grey,
+                    color: AppColors.greyColor,
                   ),
                 ),
                 Text(
@@ -52,6 +52,7 @@ class _ManageProjectsState extends State<ManageProjects> {
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
+                    color: AppColors.textColor,
                   ),
                 ),
               ],
@@ -61,12 +62,12 @@ class _ManageProjectsState extends State<ManageProjects> {
             height: 40,
             width: 40,
             decoration: BoxDecoration(
-              color: Colors.black,
+              color: AppColors.textColor,
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Icon(
               Icons.person_outline,
-              color: Colors.white,
+              color: AppColors.whiteColor,
             ),
           ),
         ],
@@ -112,7 +113,7 @@ class _ManageProjectsState extends State<ManageProjects> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.white : Colors.transparent,
+          color: isSelected ? AppColors.whiteColor : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Text(
@@ -121,7 +122,7 @@ class _ManageProjectsState extends State<ManageProjects> {
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
-            color: isSelected ? Colors.black : Colors.black54,
+            color: isSelected ? AppColors.textColor : Colors.black54,
           ),
         ),
       ),
@@ -130,19 +131,12 @@ class _ManageProjectsState extends State<ManageProjects> {
 
   // Search Bar
   Widget searchBar() {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: TextField(
-        decoration: InputDecoration(
-          hintText: 'Search by title or owner',
-          prefixIcon: const Icon(Icons.search),
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none,
-          ),
-        ),
+    return const Padding(
+      padding: EdgeInsets.all(16),
+      child: CustomTextField(
+        hintText: 'Search by title or owner',
+        prefixIcon: Icons.search,
+        showBorder: false,
       ),
     );
   }
@@ -197,10 +191,10 @@ class _ManageProjectsState extends State<ManageProjects> {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: const Color(0xFFE5E2DD),
+          color: AppColors.borderColor,
         ),
       ),
       child: Row(
@@ -214,6 +208,7 @@ class _ManageProjectsState extends State<ManageProjects> {
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
+                    color: AppColors.textColor,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -225,7 +220,7 @@ class _ManageProjectsState extends State<ManageProjects> {
                       'by ${project['owner']}',
                       style: const TextStyle(
                         fontSize: 11,
-                        color: Colors.grey,
+                        color: AppColors.greyColor,
                       ),
                     ),
                   ],

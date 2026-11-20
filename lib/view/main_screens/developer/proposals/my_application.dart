@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:nexustech/utils/app_colors.dart';
 
 class MyApplications extends StatefulWidget {
   const MyApplications({super.key});
@@ -9,11 +9,10 @@ class MyApplications extends StatefulWidget {
 }
 
 class _MyApplicationsState extends State<MyApplications> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF7F6F2),
+      backgroundColor: AppColors.backgroundColor,
 
       body: SafeArea(
         child: SingleChildScrollView(
@@ -30,6 +29,7 @@ class _MyApplicationsState extends State<MyApplications> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
+                    color: AppColors.textColor,
                   ),
                 ),
 
@@ -120,7 +120,6 @@ class _MyApplicationsState extends State<MyApplications> {
                   Color(0xffffedc9),
                   Colors.brown,
                 ),
-
               ],
             ),
           ),
@@ -135,7 +134,7 @@ class _MyApplicationsState extends State<MyApplications> {
       padding: EdgeInsets.symmetric(vertical: 8),
 
       decoration: BoxDecoration(
-        color: selected ? Colors.white : Colors.transparent,
+        color: selected ? AppColors.whiteColor : Colors.transparent,
         borderRadius: BorderRadius.circular(8),
       ),
 
@@ -147,7 +146,7 @@ class _MyApplicationsState extends State<MyApplications> {
             fontWeight: selected
                 ? FontWeight.bold
                 : FontWeight.normal,
-            color: Colors.black,
+            color: AppColors.textColor,
           ),
         ),
       ),
@@ -168,7 +167,7 @@ class _MyApplicationsState extends State<MyApplications> {
       padding: EdgeInsets.all(10),
 
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: Color(0xffE2E0DC),
@@ -190,6 +189,7 @@ class _MyApplicationsState extends State<MyApplications> {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
+                    color: AppColors.textColor,
                   ),
                 ),
               ),
@@ -230,7 +230,7 @@ class _MyApplicationsState extends State<MyApplications> {
                 "Your offer $price",
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey[800],
+                  color: AppColors.greyColor,
                 ),
               ),
 
@@ -238,7 +238,7 @@ class _MyApplicationsState extends State<MyApplications> {
                 time,
                 style: TextStyle(
                   fontSize: 10,
-                  color: Colors.grey[600],
+                  color: AppColors.greyColor,
                 ),
               ),
             ],

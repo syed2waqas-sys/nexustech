@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
-import 'manage_projects.dart';
+import 'package:nexustech/utils/app_colors.dart';
+import 'package:nexustech/view/main_screens/admin/admin_dashboard/manage_projects.dart';
+import 'package:nexustech/widgets/custom_textfield.dart';
 
 class ManageScreen extends StatefulWidget {
   const ManageScreen({super.key});
@@ -10,14 +11,10 @@ class ManageScreen extends StatefulWidget {
 }
 
 class _ManageScreenState extends State<ManageScreen> {
-  static const Color bgColor = Color(0xFFF6F4F0);
-  static const Color borderColor = Color(0xFFE5E2DD);
-  static const Color primaryColor = Color(0xFF3730C9);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -94,7 +91,7 @@ class _ManageScreenState extends State<ManageScreen> {
                   'Admin dashboard',
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.grey,
+                    color: AppColors.greyColor,
                   ),
                 ),
                 Text(
@@ -102,6 +99,7 @@ class _ManageScreenState extends State<ManageScreen> {
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
+                    color: AppColors.textColor,
                   ),
                 ),
               ],
@@ -111,12 +109,12 @@ class _ManageScreenState extends State<ManageScreen> {
             height: 40,
             width: 40,
             decoration: BoxDecoration(
-              color: Colors.black,
+              color: AppColors.textColor,
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Icon(
               Icons.shield_outlined,
-              color: Colors.white,
+              color: AppColors.whiteColor,
               size: 20,
             ),
           ),
@@ -148,9 +146,9 @@ class _ManageScreenState extends State<ManageScreen> {
         horizontal: 12,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: borderColor),
+        border: Border.all(color: AppColors.borderColor),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,6 +158,7 @@ class _ManageScreenState extends State<ManageScreen> {
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
+              color: AppColors.textColor,
             ),
           ),
           const SizedBox(height: 2),
@@ -167,7 +166,7 @@ class _ManageScreenState extends State<ManageScreen> {
             label,
             style: const TextStyle(
               fontSize: 11,
-              color: Colors.grey,
+              color: AppColors.greyColor,
             ),
           ),
         ],
@@ -181,7 +180,7 @@ class _ManageScreenState extends State<ManageScreen> {
       margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: borderColor,
+        color: AppColors.borderColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -208,7 +207,7 @@ class _ManageScreenState extends State<ManageScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.white : Colors.transparent,
+          color: isSelected ? AppColors.whiteColor : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Text(
@@ -217,7 +216,7 @@ class _ManageScreenState extends State<ManageScreen> {
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
-            color: isSelected ? Colors.black : Colors.black54,
+            color: isSelected ? AppColors.textColor : Colors.black54,
           ),
         ),
       ),
@@ -226,19 +225,12 @@ class _ManageScreenState extends State<ManageScreen> {
 
   // Search Bar
   Widget searchBar() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-      child: TextField(
-        decoration: InputDecoration(
-          hintText: 'Search users by name or role',
-          prefixIcon: const Icon(Icons.search),
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none,
-          ),
-        ),
+    return const Padding(
+      padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+      child: CustomTextField(
+        hintText: 'Search users by name or role',
+        prefixIcon: Icons.search,
+        showBorder: false,
       ),
     );
   }
@@ -256,9 +248,9 @@ class _ManageScreenState extends State<ManageScreen> {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: borderColor),
+        border: Border.all(color: AppColors.borderColor),
       ),
       child: Row(
         children: [
@@ -273,6 +265,7 @@ class _ManageScreenState extends State<ManageScreen> {
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
+                    color: AppColors.textColor,
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -282,13 +275,13 @@ class _ManageScreenState extends State<ManageScreen> {
                       role,
                       style: const TextStyle(
                         fontSize: 11,
-                        color: Colors.grey,
+                        color: AppColors.greyColor,
                       ),
                     ),
                     if (isBlocked) ...[
                       const Text(
                         ' · ',
-                        style: TextStyle(color: Colors.grey),
+                        style: TextStyle(color: AppColors.greyColor),
                       ),
                       const Text(
                         'Blocked',
@@ -337,10 +330,10 @@ class _ManageScreenState extends State<ManageScreen> {
       width: 72,
       padding: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
-        color: isBlocked ? primaryColor : Colors.white,
+        color: isBlocked ? AppColors.primaryColor : AppColors.whiteColor,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: isBlocked ? primaryColor : Colors.grey,
+          color: isBlocked ? AppColors.primaryColor : AppColors.greyColor,
         ),
       ),
       child: Text(
@@ -349,7 +342,7 @@ class _ManageScreenState extends State<ManageScreen> {
         style: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w600,
-          color: isBlocked ? Colors.white : Colors.red,
+          color: isBlocked ? AppColors.whiteColor : Colors.red,
         ),
       ),
     );
