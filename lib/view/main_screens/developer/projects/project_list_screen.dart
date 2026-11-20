@@ -1,8 +1,25 @@
 
 import 'package:flutter/material.dart';
+import 'package:nexustech/view/main_screens/developer/projects/project_details_screen.dart';
 
-class BrowseProjects extends StatelessWidget {
+class BrowseProjects extends StatefulWidget {
   const BrowseProjects({super.key});
+
+  @override
+  State<BrowseProjects> createState() => _BrowseProjectsState();
+}
+
+class _BrowseProjectsState extends State<BrowseProjects> {
+
+  // Navigate to Project Details
+  void openProjectDetails() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProjectDetails(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,41 +109,53 @@ class BrowseProjects extends StatelessWidget {
                 SizedBox(height: 10),
 
                 // Project 1
-                projectCard(
-                  "2 days ago",
-                  "Inventory tracker for my bakery",
-                  "\$400 to \$600",
-                  "6 proposals",
+                GestureDetector(
+                  onTap: openProjectDetails,
+                  child: projectCard(
+                    "2 days ago",
+                    "Inventory tracker for my bakery",
+                    "\$400 to \$600",
+                    "6 proposals",
+                  ),
                 ),
 
                 SizedBox(height: 8),
 
                 // Project 2
-                projectCard(
-                  "4 days ago",
-                  "Quiz app for a school society",
-                  "\$300 to \$450",
-                  "2 proposals",
+                GestureDetector(
+                  onTap: openProjectDetails,
+                  child: projectCard(
+                    "4 days ago",
+                    "Quiz app for a school society",
+                    "\$300 to \$450",
+                    "2 proposals",
+                  ),
                 ),
 
                 SizedBox(height: 8),
 
                 // Project 3
-                projectCard(
-                  "6 days ago",
-                  "Habit tracker with weekly streaks",
-                  "\$200 to \$350",
-                  "9 proposals",
+                GestureDetector(
+                  onTap: openProjectDetails,
+                  child: projectCard(
+                    "6 days ago",
+                    "Habit tracker with weekly streaks",
+                    "\$200 to \$350",
+                    "9 proposals",
+                  ),
                 ),
 
                 SizedBox(height: 8),
 
                 // Project 4
-                projectCard(
-                  "1 week ago",
-                  "Booking app for a campus gym",
-                  "\$500 to \$800",
-                  "No proposals yet",
+                GestureDetector(
+                  onTap: openProjectDetails,
+                  child: projectCard(
+                    "1 week ago",
+                    "Booking app for a campus gym",
+                    "\$500 to \$800",
+                    "No proposals yet",
+                  ),
                 ),
               ],
             ),

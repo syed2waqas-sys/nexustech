@@ -1,8 +1,16 @@
 
 import 'package:flutter/material.dart';
+import 'package:nexustech/view/main_screens/developer/proposals/apply_with_proposal.dart';
 
-class ProjectDetails extends StatelessWidget {
+
+class ProjectDetails extends StatefulWidget {
   const ProjectDetails({super.key});
+
+  @override
+  State<ProjectDetails> createState() => _ProjectDetailsState();
+}
+
+class _ProjectDetailsState extends State<ProjectDetails> {
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +32,15 @@ class ProjectDetails extends StatelessWidget {
                     children: [
 
                       // Back Arrow
-                      Icon(
-                        Icons.arrow_back_ios,
-                        size: 16,
-                        color: Colors.grey,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          size: 16,
+                          color: Colors.grey,
+                        ),
                       ),
 
                       SizedBox(height: 18),
@@ -315,22 +328,33 @@ class ProjectDetails extends StatelessWidget {
                 ),
               ),
 
-              child: Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(vertical: 13),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ApplyProject(),
+                    ),
+                  );
+                },
 
-                decoration: BoxDecoration(
-                  color: Color(0xff3939D5),
-                  borderRadius: BorderRadius.circular(9),
-                ),
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(vertical: 13),
 
-                child: Center(
-                  child: Text(
-                    "Apply to this project",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 11,
-                      fontWeight: FontWeight.bold,
+                  decoration: BoxDecoration(
+                    color: Color(0xff3939D5),
+                    borderRadius: BorderRadius.circular(9),
+                  ),
+
+                  child: Center(
+                    child: Text(
+                      "Apply to this project",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),

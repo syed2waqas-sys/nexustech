@@ -1,8 +1,15 @@
 
 import 'package:flutter/material.dart';
+import 'package:nexustech/view/main_screens/developer/proposals/my_application.dart';
 
-class ApplyProject extends StatelessWidget {
+class ApplyProject extends StatefulWidget {
   const ApplyProject({super.key});
+
+  @override
+  State<ApplyProject> createState() => _ApplyProjectState();
+}
+
+class _ApplyProjectState extends State<ApplyProject> {
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +34,15 @@ class ApplyProject extends StatelessWidget {
                       Row(
                         children: [
 
-                          Icon(
-                            Icons.arrow_back_ios,
-                            size: 16,
-                            color: Colors.grey,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              size: 16,
+                              color: Colors.grey,
+                            ),
                           ),
 
                           SizedBox(width: 10),
@@ -266,22 +278,33 @@ class ApplyProject extends StatelessWidget {
                 children: [
 
                   // Send Proposal Button
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(vertical: 12),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MyApplications(),
+                        ),
+                      );
+                    },
 
-                    decoration: BoxDecoration(
-                      color: Color(0xff3939D5),
-                      borderRadius: BorderRadius.circular(9),
-                    ),
+                    child: Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(vertical: 12),
 
-                    child: Center(
-                      child: Text(
-                        "Send proposal",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 11,
-                          fontWeight: FontWeight.bold,
+                      decoration: BoxDecoration(
+                        color: Color(0xff3939D5),
+                        borderRadius: BorderRadius.circular(9),
+                      ),
+
+                      child: Center(
+                        child: Text(
+                          "Send proposal",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),

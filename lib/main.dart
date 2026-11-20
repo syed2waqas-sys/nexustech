@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nexustech/view/main_screens/admin/admin_dashboard/manage_projects.dart';
 import 'package:nexustech/view/main_screens/admin/admin_dashboard/manage_users.dart';
 import 'package:nexustech/view/main_screens/developer/dashboard/developer_dashboard.dart';
+import 'package:nexustech/view/main_screens/developer/projects/project_details_screen.dart';
+import 'package:nexustech/view/main_screens/developer/projects/project_list_screen.dart';
 
 
 void main() {
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
         
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: DashboardScreen()
+      home: BrowseProjects()
     );
   }
 }
