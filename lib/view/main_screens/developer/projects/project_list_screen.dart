@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:nexustech/utils/app_colors.dart';
+import 'package:nexustech/view/main_screens/developer/dashboard/developer_dashboard.dart';
 import 'package:nexustech/view/main_screens/developer/projects/project_details_screen.dart';
+import 'package:nexustech/view/main_screens/developer/proposals/my_application.dart';
+import 'package:nexustech/view/main_screens/profile/dev_profile_screen.dart';
 import 'package:nexustech/widgets/custom_textfield.dart';
+import 'package:nexustech/widgets/developer_nabar.dart';
 
 class BrowseProjects extends StatefulWidget {
   const BrowseProjects({super.key});
@@ -12,7 +16,6 @@ class BrowseProjects extends StatefulWidget {
 
 class _BrowseProjectsState extends State<BrowseProjects> {
 
-  // Navigate to Project Details
   void openProjectDetails() {
     Navigator.push(
       context,
@@ -26,17 +29,13 @@ class _BrowseProjectsState extends State<BrowseProjects> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(16),
-
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
-                // Screen Heading
                 Text(
                   "Browse projects",
                   style: TextStyle(
@@ -48,7 +47,6 @@ class _BrowseProjectsState extends State<BrowseProjects> {
 
                 SizedBox(height: 14),
 
-                // Search Bar
                 CustomTextField(
                   hintText: "Search projects",
                   prefixIcon: Icons.search,
@@ -57,25 +55,16 @@ class _BrowseProjectsState extends State<BrowseProjects> {
 
                 SizedBox(height: 10),
 
-                // Category Buttons
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-
                   child: Row(
                     children: [
-
                       categoryButton("All", false),
-
                       SizedBox(width: 6),
-
                       categoryButton("Mobile app", true),
-
                       SizedBox(width: 6),
-
                       categoryButton("Web development", false),
-
                       SizedBox(width: 6),
-
                       categoryButton("UI/UX", false),
                     ],
                   ),
@@ -83,7 +72,6 @@ class _BrowseProjectsState extends State<BrowseProjects> {
 
                 SizedBox(height: 12),
 
-                // Projects Count
                 Text(
                   "24 open projects, newest first",
                   style: TextStyle(
@@ -94,7 +82,6 @@ class _BrowseProjectsState extends State<BrowseProjects> {
 
                 SizedBox(height: 10),
 
-                // Project 1
                 GestureDetector(
                   onTap: openProjectDetails,
                   child: projectCard(
@@ -107,7 +94,6 @@ class _BrowseProjectsState extends State<BrowseProjects> {
 
                 SizedBox(height: 8),
 
-                // Project 2
                 GestureDetector(
                   onTap: openProjectDetails,
                   child: projectCard(
@@ -120,7 +106,6 @@ class _BrowseProjectsState extends State<BrowseProjects> {
 
                 SizedBox(height: 8),
 
-                // Project 3
                 GestureDetector(
                   onTap: openProjectDetails,
                   child: projectCard(
@@ -133,7 +118,6 @@ class _BrowseProjectsState extends State<BrowseProjects> {
 
                 SizedBox(height: 8),
 
-                // Project 4
                 GestureDetector(
                   onTap: openProjectDetails,
                   child: projectCard(
@@ -148,17 +132,43 @@ class _BrowseProjectsState extends State<BrowseProjects> {
           ),
         ),
       ),
+
+      bottomNavigationBar: DeveloperNavbar(
+        selectedIndex: 1,
+        onItemTap: (index) {
+          if (index == 0) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const DashboardScreen(),
+              ),
+            );
+          } else if (index == 2) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const MyApplications(),
+              ),
+            );
+          } else if (index == 3) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProfileScreen(),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 
-  // Category Button
   Widget categoryButton(String title, bool selected) {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 12,
         vertical: 7,
       ),
-
       decoration: BoxDecoration(
         color: selected
             ? AppColors.primaryColor
@@ -170,7 +180,6 @@ class _BrowseProjectsState extends State<BrowseProjects> {
               : AppColors.borderColor,
         ),
       ),
-
       child: Text(
         title,
         style: TextStyle(
@@ -183,7 +192,6 @@ class _BrowseProjectsState extends State<BrowseProjects> {
     );
   }
 
-  // Project Card
   Widget projectCard(
     String time,
     String title,
@@ -193,7 +201,6 @@ class _BrowseProjectsState extends State<BrowseProjects> {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(12),
-
       decoration: BoxDecoration(
         color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(12),
@@ -201,27 +208,21 @@ class _BrowseProjectsState extends State<BrowseProjects> {
           color: AppColors.borderColor,
         ),
       ),
-
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
-          // Category and Time
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-
               Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: 8,
                   vertical: 4,
                 ),
-
                 decoration: BoxDecoration(
                   color: Color(0xffEEEEEA),
                   borderRadius: BorderRadius.circular(15),
                 ),
-
                 child: Text(
                   "Mobile app",
                   style: TextStyle(
@@ -230,7 +231,6 @@ class _BrowseProjectsState extends State<BrowseProjects> {
                   ),
                 ),
               ),
-
               Text(
                 time,
                 style: TextStyle(
@@ -243,7 +243,6 @@ class _BrowseProjectsState extends State<BrowseProjects> {
 
           SizedBox(height: 7),
 
-          // Project Title
           Text(
             title,
             style: TextStyle(
@@ -255,11 +254,9 @@ class _BrowseProjectsState extends State<BrowseProjects> {
 
           SizedBox(height: 5),
 
-          // Price and Proposals
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-
               Text(
                 price,
                 style: TextStyle(
@@ -267,7 +264,6 @@ class _BrowseProjectsState extends State<BrowseProjects> {
                   color: AppColors.textColor,
                 ),
               ),
-
               Text(
                 proposals,
                 style: TextStyle(

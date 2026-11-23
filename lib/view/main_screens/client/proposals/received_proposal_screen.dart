@@ -1,4 +1,10 @@
+
 import 'package:flutter/material.dart';
+import 'package:nexustech/view/main_screens/client/dashboard/client_dashboad.dart';
+import 'package:nexustech/view/main_screens/profile/client_profile_screen.dart';
+import 'package:nexustech/widgets/client_navbar.dart';
+
+import 'package:nexustech/view/main_screens/client/projects/my_projects_screen.dart';
 
 class ProposalsScreen extends StatelessWidget {
   const ProposalsScreen({super.key});
@@ -14,7 +20,6 @@ class ProposalsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Heading with Back Button
                 Row(
                   children: [
                     InkWell(
@@ -23,9 +28,7 @@ class ProposalsScreen extends StatelessWidget {
                       },
                       child: const Icon(Icons.arrow_back_ios),
                     ),
-
                     const SizedBox(width: 10),
-
                     const Text(
                       "Proposals",
                       style: TextStyle(
@@ -39,7 +42,6 @@ class ProposalsScreen extends StatelessWidget {
 
                 const SizedBox(height: 5),
 
-                // Subtitle
                 Row(
                   children: const [
                     Icon(Icons.work_outline, size: 12, color: Colors.grey),
@@ -53,7 +55,6 @@ class ProposalsScreen extends StatelessWidget {
 
                 const SizedBox(height: 12),
 
-                // Proposal 1
                 proposalCard(
                   initials: "HR",
                   name: "Hamza Raza",
@@ -65,7 +66,6 @@ class ProposalsScreen extends StatelessWidget {
 
                 const SizedBox(height: 12),
 
-                // Proposal 2
                 proposalCard(
                   initials: "SM",
                   name: "Sana Malik",
@@ -77,7 +77,6 @@ class ProposalsScreen extends StatelessWidget {
 
                 const SizedBox(height: 12),
 
-                // Proposal 3
                 proposalCard(
                   initials: "OT",
                   name: "Omar Tariq",
@@ -91,10 +90,36 @@ class ProposalsScreen extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: ClientNavbar(
+        selectedIndex: 2,
+        onItemTap: (index) {
+          if (index == 0) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ClientHomeScreen(),
+              ),
+            );
+          } else if (index == 1) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Project_Screen(),
+              ),
+            );
+          } else if (index == 3) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ClientProfileScreen(),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 
-  // Proposal Card
   Widget proposalCard({
     required String initials,
     required String name,
@@ -114,7 +139,6 @@ class ProposalsScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Profile and Price
           Row(
             children: [
               CircleAvatar(
@@ -189,7 +213,6 @@ class ProposalsScreen extends StatelessWidget {
 
           const SizedBox(height: 12),
 
-          // Description
           Text(
             description,
             maxLines: 2,
@@ -203,7 +226,6 @@ class ProposalsScreen extends StatelessWidget {
 
           const SizedBox(height: 12),
 
-          // Buttons
           Row(
             children: [
               Expanded(

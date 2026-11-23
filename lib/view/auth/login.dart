@@ -1,7 +1,12 @@
+import 'package:nexustech/services/firebase/firebase_auth_services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nexustech/utils/app_assets.dart';
 import 'package:nexustech/utils/app_colors.dart';
 import 'package:nexustech/view/auth/forget_password.dart';
 import 'package:nexustech/view/auth/signup.dart';
+import 'package:nexustech/view/main_screens/admin/admin_dashboard/manage_projects.dart';
+//import 'package:nexustech/view/main_screens/client/dashboard/client_dashboad.dart';
 import 'package:nexustech/widgets/custom_button.dart';
 
 import 'package:flutter/material.dart';
@@ -15,6 +20,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+   bool isLoading = false;   //This will prevent the user from repeatedly tapping the login button while Firebase is processing
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool hidePassword = true;
@@ -140,7 +147,27 @@ class _LoginScreenState extends State<LoginScreen> {
                 borderColor: AppColors.primaryColor,
                 borderRadius: 14,
                 fontWeight: FontWeight.bold,
-                onButtonTap: () {},
+                /*onButtonTap: () {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => const ClientHomeScreen(),
+      builder: (context) => const ManageProjects(),
+      builder: (context) => const DashboardScreen(),
+    ),
+  );
+                }*/
+
+  onButtonTap: () {
+    FirebaseAuthServices().loginWithEmailAndPassword(
+      emailAddress: emailController.text,
+      password: passwordController.text,
+      context: context,
+    );
+  },
+
+  
+
               ),
 
               const Spacer(),
@@ -194,3 +221,5 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
+

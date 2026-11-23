@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nexustech/utils/app_colors.dart';
+import 'package:nexustech/view/main_screens/developer/dashboard/developer_dashboard.dart';
+import 'package:nexustech/widgets/developer_nabar.dart';
+import 'package:nexustech/view/main_screens/profile/dev_profile_screen.dart';
+import 'package:nexustech/view/main_screens/developer/projects/project_list_screen.dart';
 
 class MyApplications extends StatefulWidget {
   const MyApplications({super.key});
@@ -13,17 +17,13 @@ class _MyApplicationsState extends State<MyApplications> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(16),
-
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
-                // Heading
                 Text(
                   "My applications",
                   style: TextStyle(
@@ -35,35 +35,24 @@ class _MyApplicationsState extends State<MyApplications> {
 
                 SizedBox(height: 15),
 
-                // Filter Categories
                 Container(
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     color: Color(0xffEEEEEA),
                     borderRadius: BorderRadius.circular(10),
                   ),
-
                   child: Row(
                     children: [
-                      Expanded(
-                        child: filterButton("All", true),
-                      ),
-                      Expanded(
-                        child: filterButton("Pending", false),
-                      ),
-                      Expanded(
-                        child: filterButton("Accepted", false),
-                      ),
-                      Expanded(
-                        child: filterButton("Rejected", false),
-                      ),
+                      Expanded(child: filterButton("All", true)),
+                      Expanded(child: filterButton("Pending", false)),
+                      Expanded(child: filterButton("Accepted", false)),
+                      Expanded(child: filterButton("Rejected", false)),
                     ],
                   ),
                 ),
 
                 SizedBox(height: 12),
 
-                // Application 1
                 applicationCard(
                   "Inventory tracker for my bakery",
                   "\$450",
@@ -75,7 +64,6 @@ class _MyApplicationsState extends State<MyApplications> {
 
                 SizedBox(height: 8),
 
-                // Application 2
                 applicationCard(
                   "Portfolio site for photography students",
                   "\$250",
@@ -87,7 +75,6 @@ class _MyApplicationsState extends State<MyApplications> {
 
                 SizedBox(height: 8),
 
-                // Application 3
                 applicationCard(
                   "Habit tracker with weekly streaks",
                   "\$300",
@@ -99,7 +86,6 @@ class _MyApplicationsState extends State<MyApplications> {
 
                 SizedBox(height: 8),
 
-                // Application 4
                 applicationCard(
                   "Booking app for a campus gym",
                   "\$650",
@@ -111,7 +97,6 @@ class _MyApplicationsState extends State<MyApplications> {
 
                 SizedBox(height: 8),
 
-                // Application 5
                 applicationCard(
                   "Quiz app for a school society",
                   "\$350",
@@ -125,27 +110,50 @@ class _MyApplicationsState extends State<MyApplications> {
           ),
         ),
       ),
+
+      bottomNavigationBar: DeveloperNavbar(
+        selectedIndex: 2,
+        onItemTap: (index) {
+          if (index == 0) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const DashboardScreen(),
+              ),
+            );
+          } else if (index == 1) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const BrowseProjects(),
+              ),
+            );
+          } else if (index == 3) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProfileScreen(),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 
-  // Filter Button
   Widget filterButton(String title, bool selected) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8),
-
       decoration: BoxDecoration(
         color: selected ? AppColors.whiteColor : Colors.transparent,
         borderRadius: BorderRadius.circular(8),
       ),
-
       child: Center(
         child: Text(
           title,
           style: TextStyle(
             fontSize: 10,
-            fontWeight: selected
-                ? FontWeight.bold
-                : FontWeight.normal,
+            fontWeight: selected ? FontWeight.bold : FontWeight.normal,
             color: AppColors.textColor,
           ),
         ),
@@ -153,7 +161,6 @@ class _MyApplicationsState extends State<MyApplications> {
     );
   }
 
-  // Application Card
   Widget applicationCard(
     String title,
     String price,
@@ -165,7 +172,6 @@ class _MyApplicationsState extends State<MyApplications> {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(10),
-
       decoration: BoxDecoration(
         color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(12),
@@ -173,16 +179,12 @@ class _MyApplicationsState extends State<MyApplications> {
           color: Color(0xffE2E0DC),
         ),
       ),
-
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
-          // Title and Status
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               Expanded(
                 child: Text(
                   title,
@@ -193,20 +195,16 @@ class _MyApplicationsState extends State<MyApplications> {
                   ),
                 ),
               ),
-
               SizedBox(width: 5),
-
               Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: 9,
                   vertical: 4,
                 ),
-
                 decoration: BoxDecoration(
                   color: bgColor,
                   borderRadius: BorderRadius.circular(15),
                 ),
-
                 child: Text(
                   status,
                   style: TextStyle(
@@ -218,14 +216,10 @@ class _MyApplicationsState extends State<MyApplications> {
               ),
             ],
           ),
-
           SizedBox(height: 7),
-
-          // Price and Time
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-
               Text(
                 "Your offer $price",
                 style: TextStyle(
@@ -233,7 +227,6 @@ class _MyApplicationsState extends State<MyApplications> {
                   color: AppColors.greyColor,
                 ),
               ),
-
               Text(
                 time,
                 style: TextStyle(

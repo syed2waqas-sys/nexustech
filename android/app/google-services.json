@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "532908347954",
+    "project_id": "nexustech-29e38",
+    "storage_bucket": "nexustech-29e38.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:532908347954:android:36db8879f5ea54ebebe22b",
+        "android_client_info": {
+          "package_name": "com.example.nexustech"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3LovsCsZbeepfdFQPF0G4oZyrAGMY3FI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

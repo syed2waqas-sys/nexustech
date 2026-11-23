@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
+import 'package:nexustech/utils/app_colors.dart';
 import 'package:nexustech/view/main_screens/developer/proposals/apply_with_proposal.dart';
-
+import 'package:nexustech/widgets/custom_button.dart';
 
 class ProjectDetails extends StatefulWidget {
   const ProjectDetails({super.key});
@@ -11,27 +11,20 @@ class ProjectDetails extends StatefulWidget {
 }
 
 class _ProjectDetailsState extends State<ProjectDetails> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF7F6F2),
-
+      backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         child: Column(
           children: [
-
-            // Main Content
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
                   padding: EdgeInsets.all(16),
-
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
-                      // Back Arrow
                       GestureDetector(
                         onTap: () {
                           Navigator.pop(context);
@@ -39,16 +32,14 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                         child: Icon(
                           Icons.arrow_back_ios,
                           size: 16,
-                          color: Colors.grey,
+                          color: AppColors.greyColor,
                         ),
                       ),
 
                       SizedBox(height: 18),
 
-                      // Project Status and Category
                       Row(
                         children: [
-
                           Container(
                             padding: EdgeInsets.symmetric(
                               horizontal: 8,
@@ -62,7 +53,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                               "Open",
                               style: TextStyle(
                                 fontSize: 9,
-                                color: Colors.indigo,
+                                color: AppColors.primaryColor,
                               ),
                             ),
                           ),
@@ -88,34 +79,30 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
                       SizedBox(height: 10),
 
-                      // Project Title
                       Text(
                         "Inventory tracker\nfor my bakery",
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                           height: 1.2,
+                          color: AppColors.textColor,
                         ),
                       ),
 
                       SizedBox(height: 12),
 
-                      // Client Information Card
                       Container(
                         width: double.infinity,
                         padding: EdgeInsets.all(10),
-
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: AppColors.whiteColor,
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: Color(0xffE2E0DC),
+                            color: AppColors.borderColor,
                           ),
                         ),
-
                         child: Row(
                           children: [
-
                             CircleAvatar(
                               radius: 17,
                               backgroundColor: Color(0xffE7E5FF),
@@ -123,7 +110,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                                 "AK",
                                 style: TextStyle(
                                   fontSize: 10,
-                                  color: Colors.indigo,
+                                  color: AppColors.primaryColor,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -134,12 +121,12 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-
                                 Text(
                                   "Ayesha Khan",
                                   style: TextStyle(
                                     fontSize: 11,
                                     fontWeight: FontWeight.bold,
+                                    color: AppColors.textColor,
                                   ),
                                 ),
 
@@ -149,7 +136,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                                   "Client, posted 2 days ago",
                                   style: TextStyle(
                                     fontSize: 9,
-                                    color: Colors.grey,
+                                    color: AppColors.greyColor,
                                   ),
                                 ),
                               ],
@@ -160,31 +147,26 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
                       SizedBox(height: 12),
 
-                      // Budget and Proposals Cards
                       Row(
                         children: [
-
                           Expanded(
                             child: Container(
                               padding: EdgeInsets.all(10),
-
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: AppColors.whiteColor,
                                 borderRadius: BorderRadius.circular(12),
                                 border: Border.all(
-                                  color: Color(0xffE2E0DC),
+                                  color: AppColors.borderColor,
                                 ),
                               ),
-
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-
                                   Text(
                                     "Client budget",
                                     style: TextStyle(
                                       fontSize: 9,
-                                      color: Colors.grey,
+                                      color: AppColors.greyColor,
                                     ),
                                   ),
 
@@ -195,6 +177,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.bold,
+                                      color: AppColors.textColor,
                                     ),
                                   ),
                                 ],
@@ -207,24 +190,21 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                           Expanded(
                             child: Container(
                               padding: EdgeInsets.all(10),
-
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: AppColors.whiteColor,
                                 borderRadius: BorderRadius.circular(12),
                                 border: Border.all(
-                                  color: Color(0xffE2E0DC),
+                                  color: AppColors.borderColor,
                                 ),
                               ),
-
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-
                                   Text(
                                     "Proposals so far",
                                     style: TextStyle(
                                       fontSize: 9,
-                                      color: Colors.grey,
+                                      color: AppColors.greyColor,
                                     ),
                                   ),
 
@@ -235,6 +215,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.bold,
+                                      color: AppColors.textColor,
                                     ),
                                   ),
                                 ],
@@ -246,18 +227,17 @@ class _ProjectDetailsState extends State<ProjectDetails> {
 
                       SizedBox(height: 16),
 
-                      // About Project Heading
                       Text(
                         "About this project",
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
+                          color: AppColors.textColor,
                         ),
                       ),
 
                       SizedBox(height: 7),
 
-                      // Project Description
                       Text(
                         "I run a small bakery and want a simple app to "
                         "log daily stock, flag items running low, and "
@@ -266,29 +246,26 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                         style: TextStyle(
                           fontSize: 12,
                           height: 1.5,
+                          color: AppColors.textColor,
                         ),
                       ),
 
                       SizedBox(height: 14),
 
-                      // Information Box
                       Container(
                         width: double.infinity,
                         padding: EdgeInsets.all(12),
-
                         decoration: BoxDecoration(
                           color: Color(0xffE7E5FF),
                           borderRadius: BorderRadius.circular(12),
                         ),
-
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-
                             Icon(
                               Icons.info_outline,
                               size: 15,
-                              color: Colors.indigo,
+                              color: AppColors.primaryColor,
                             ),
 
                             SizedBox(width: 8),
@@ -300,7 +277,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                                 "and your GitHub link.",
                                 style: TextStyle(
                                   fontSize: 10,
-                                  color: Colors.indigo,
+                                  color: AppColors.primaryColor,
                                   height: 1.4,
                                 ),
                               ),
@@ -314,22 +291,26 @@ class _ProjectDetailsState extends State<ProjectDetails> {
               ),
             ),
 
-            // Bottom Apply Button
             Container(
               width: double.infinity,
               padding: EdgeInsets.all(12),
-
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.whiteColor,
                 border: Border(
                   top: BorderSide(
-                    color: Color(0xffE2E0DC),
+                    color: AppColors.borderColor,
                   ),
                 ),
               ),
-
-              child: GestureDetector(
-                onTap: () {
+              child: CustomButton(
+                buttonColor: AppColors.primaryColor,
+                buttonText: "Apply to this project",
+                textColor: AppColors.whiteColor,
+                height: 42,
+                borderRadius: 9,
+                fontSize: 11,
+                fontWeight: FontWeight.bold,
+                onButtonTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -337,27 +318,6 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                     ),
                   );
                 },
-
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(vertical: 13),
-
-                  decoration: BoxDecoration(
-                    color: Color(0xff3939D5),
-                    borderRadius: BorderRadius.circular(9),
-                  ),
-
-                  child: Center(
-                    child: Text(
-                      "Apply to this project",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 11,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
               ),
             ),
           ],

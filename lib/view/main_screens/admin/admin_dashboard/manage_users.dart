@@ -1,7 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:nexustech/utils/app_colors.dart';
 import 'package:nexustech/view/main_screens/admin/admin_dashboard/manage_projects.dart';
 import 'package:nexustech/widgets/custom_textfield.dart';
+import 'package:nexustech/widgets/navbar.dart';
 
 class ManageScreen extends StatefulWidget {
   const ManageScreen({super.key});
@@ -11,6 +13,20 @@ class ManageScreen extends StatefulWidget {
 }
 
 class _ManageScreenState extends State<ManageScreen> {
+  final List<bool> blockedUsers = [
+    false,
+    false,
+    false,
+    true,
+    false,
+  ];
+
+  void toggleBlock(int index) {
+    setState(() {
+      blockedUsers[index] = !blockedUsers[index];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,50 +45,65 @@ class _ManageScreenState extends State<ManageScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 children: [
                   userCard(
+                    0,
                     'Ayesha Khan',
                     'Client',
                     'AK',
                     const Color(0xFFE8E8FF),
                     Colors.indigo,
-                    false,
                   ),
                   userCard(
+                    1,
                     'Hamza Raza',
                     'Developer',
                     'HR',
                     const Color(0xFFFFF0C9),
                     Colors.orange,
-                    false,
                   ),
                   userCard(
+                    2,
                     'Sana Malik',
                     'Developer',
                     'SM',
                     const Color(0xFFDDF5E7),
                     Colors.green,
-                    false,
                   ),
                   userCard(
+                    3,
                     'Bilal Ahmed',
                     'Client',
                     'BA',
                     const Color(0xFFEAEAEA),
                     Colors.black87,
-                    true,
                   ),
                   userCard(
+                    4,
                     'Omar Tariq',
                     'Developer',
                     'OT',
                     const Color(0xFFE0F0FF),
                     Colors.blue,
-                    false,
                   ),
                 ],
               ),
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: Navbar(
+        selectedIndex: 0,
+        onItemTap: (index) {
+          if (index == 1) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ManageProjects(),
+              ),
+            );
+          } else if (index == 2) {
+            // Logout functionality can be added here.
+          }
+        },
       ),
     );
   }
@@ -237,12 +268,12 @@ class _ManageScreenState extends State<ManageScreen> {
 
   // User Card
   Widget userCard(
+    int index,
     String name,
     String role,
     String initials,
     Color avatarBg,
     Color avatarText,
-    bool isBlocked,
   ) {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
@@ -278,7 +309,7 @@ class _ManageScreenState extends State<ManageScreen> {
                         color: AppColors.greyColor,
                       ),
                     ),
-                    if (isBlocked) ...[
+                    if (blockedUsers[index]) ...[
                       const Text(
                         ' · ',
                         style: TextStyle(color: AppColors.greyColor),
@@ -297,7 +328,7 @@ class _ManageScreenState extends State<ManageScreen> {
               ],
             ),
           ),
-          blockButton(isBlocked),
+          blockButton(index),
         ],
       ),
     );
@@ -325,24 +356,35 @@ class _ManageScreenState extends State<ManageScreen> {
   }
 
   // Block Button
-  Widget blockButton(bool isBlocked) {
-    return Container(
-      width: 72,
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      decoration: BoxDecoration(
-        color: isBlocked ? AppColors.primaryColor : AppColors.whiteColor,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: isBlocked ? AppColors.primaryColor : AppColors.greyColor,
+  Widget blockButton(int index) {
+    return GestureDetector(
+      onTap: () {
+        toggleBlock(index);
+      },
+      child: Container(
+        width: 72,
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        decoration: BoxDecoration(
+          color: blockedUsers[index]
+              ? AppColors.primaryColor
+              : AppColors.whiteColor,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: blockedUsers[index]
+                ? AppColors.primaryColor
+                : AppColors.greyColor,
+          ),
         ),
-      ),
-      child: Text(
-        isBlocked ? 'Unblock' : 'Block',
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w600,
-          color: isBlocked ? AppColors.whiteColor : Colors.red,
+        child: Text(
+          blockedUsers[index] ? 'Unblock' : 'Block',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: blockedUsers[index]
+                ? AppColors.whiteColor
+                : Colors.red,
+          ),
         ),
       ),
     );

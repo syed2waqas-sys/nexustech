@@ -1,7 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:nexustech/utils/app_colors.dart';
 import 'package:nexustech/view/main_screens/admin/admin_dashboard/manage_users.dart';
 import 'package:nexustech/widgets/custom_textfield.dart';
+import 'package:nexustech/widgets/navbar.dart';
 
 class ManageProjects extends StatefulWidget {
   const ManageProjects({super.key});
@@ -11,6 +13,45 @@ class ManageProjects extends StatefulWidget {
 }
 
 class _ManageProjectsState extends State<ManageProjects> {
+  List<Map<String, String>> projects = [
+    {
+      'title': 'Inventory tracker for my bakery',
+      'owner': 'Ayasha Khan',
+      'status': 'Open',
+    },
+    {
+      'title': 'Portfolio site for photography studio',
+      'owner': 'Ayasha Khan',
+      'status': 'In Progress',
+    },
+    {
+      'title': 'Quiz app for a school society',
+      'owner': 'Bilal Ahmed',
+      'status': 'Open',
+    },
+    {
+      'title': 'Landing page for the society fest',
+      'owner': 'Ayasha Khan',
+      'status': 'Completed',
+    },
+    {
+      'title': 'Booking app for a campus gym',
+      'owner': 'Zara Iqbal',
+      'status': 'Closed',
+    },
+    {
+      'title': 'Habit tracker with weekly streaks',
+      'owner': 'Zara Iqbal',
+      'status': 'Open',
+    },
+  ];
+
+  void deleteProject(int index) {
+    setState(() {
+      projects.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +67,21 @@ class _ManageProjectsState extends State<ManageProjects> {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: Navbar(
+        selectedIndex: 1,
+        onItemTap: (index) {
+          if (index == 0) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ManageScreen(),
+              ),
+            );
+          } else if (index == 2) {
+            // Logout functionality can be added here.
+          }
+        },
       ),
     );
   }
@@ -143,50 +199,17 @@ class _ManageProjectsState extends State<ManageProjects> {
 
   // Project List
   Widget projectList() {
-    List<Map<String, String>> projects = [
-      {
-        'title': 'Inventory tracker for my bakery',
-        'owner': 'Ayasha Khan',
-        'status': 'Open',
-      },
-      {
-        'title': 'Portfolio site for photography studio',
-        'owner': 'Ayasha Khan',
-        'status': 'In Progress',
-      },
-      {
-        'title': 'Quiz app for a school society',
-        'owner': 'Bilal Ahmed',
-        'status': 'Open',
-      },
-      {
-        'title': 'Landing page for the society fest',
-        'owner': 'Ayasha Khan',
-        'status': 'Completed',
-      },
-      {
-        'title': 'Booking app for a campus gym',
-        'owner': 'Zara Iqbal',
-        'status': 'Closed',
-      },
-      {
-        'title': 'Habit tracker with weekly streaks',
-        'owner': 'Zara Iqbal',
-        'status': 'Open',
-      },
-    ];
-
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       itemCount: projects.length,
       itemBuilder: (context, index) {
-        return projectCard(projects[index]);
+        return projectCard(projects[index], index);
       },
     );
   }
 
   // Project Card
-  Widget projectCard(Map<String, String> project) {
+  Widget projectCard(Map<String, String> project, int index) {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(12),
@@ -228,9 +251,14 @@ class _ManageProjectsState extends State<ManageProjects> {
               ],
             ),
           ),
-          const Icon(
-            Icons.delete_outline,
-            color: Colors.red,
+          GestureDetector(
+            onTap: () {
+              deleteProject(index);
+            },
+            child: const Icon(
+              Icons.delete_outline,
+              color: Colors.red,
+            ),
           ),
         ],
       ),

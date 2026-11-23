@@ -1,5 +1,8 @@
-
 import 'package:flutter/material.dart';
+import 'package:nexustech/view/main_screens/developer/projects/project_list_screen.dart';
+import 'package:nexustech/view/main_screens/developer/proposals/my_application.dart';
+import 'package:nexustech/view/main_screens/profile/dev_profile_screen.dart';
+import 'package:nexustech/widgets/developer_nabar.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -9,7 +12,6 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +23,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 // Header
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,7 +46,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         ),
                       ],
                     ),
-
                     CircleAvatar(
                       backgroundColor: Color(0xffffefc9),
                       child: Text(
@@ -172,6 +172,35 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ),
       ),
+
+      // Bottom Navigation Bar
+      bottomNavigationBar: DeveloperNavbar(
+        selectedIndex: 0,
+        onItemTap: (index) {
+          if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const BrowseProjects(),
+              ),
+            );
+          } else if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const MyApplications(),
+              ),
+            );
+          } else if (index == 3) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProfileScreen(),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 
@@ -225,7 +254,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -243,7 +271,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   style: TextStyle(fontSize: 10),
                 ),
               ),
-
               Text(
                 time,
                 style: TextStyle(
@@ -305,7 +332,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-
           Expanded(
             child: Text(
               title,

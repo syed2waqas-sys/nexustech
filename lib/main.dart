@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:nexustech/view/main_screens/admin/admin_dashboard/manage_projects.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:nexustech/firebase_options.dart';
 import 'package:nexustech/view/main_screens/admin/admin_dashboard/manage_users.dart';
+import 'package:nexustech/view/main_screens/client/dashboard/client_dashboad.dart';
 import 'package:nexustech/view/main_screens/developer/dashboard/developer_dashboard.dart';
-import 'package:nexustech/view/main_screens/developer/projects/project_details_screen.dart';
-import 'package:nexustech/view/main_screens/developer/projects/project_list_screen.dart';
+import 'package:nexustech/view/main_screens/profile/client_profile_screen.dart';
+import 'package:nexustech/view/splash_screen/spalsh_screen.dart';
 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-void main() {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: BrowseProjects()
+      home: ClientHomeScreen(),
     );
   }
 }
-

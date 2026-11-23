@@ -1,5 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:nexustech/utils/app_colors.dart';
+import 'package:nexustech/view/auth/login.dart';
+import 'package:nexustech/view/main_screens/developer/dashboard/developer_dashboard.dart';
+import 'package:nexustech/widgets/developer_nabar.dart';
+import 'package:nexustech/view/main_screens/developer/projects/project_list_screen.dart';
+import 'package:nexustech/view/main_screens/developer/proposals/my_application.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -8,20 +14,15 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(16),
-
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
-              // Heading
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-
                   Text(
                     "Profile",
                     style: TextStyle(
@@ -30,7 +31,6 @@ class ProfileScreen extends StatelessWidget {
                       color: AppColors.textColor,
                     ),
                   ),
-
                   Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: 12,
@@ -41,7 +41,6 @@ class ProfileScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: AppColors.borderColor),
                     ),
-
                     child: Row(
                       children: [
                         Icon(
@@ -62,13 +61,9 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ],
               ),
-
               SizedBox(height: 18),
-
-              // Profile Information
               Row(
                 children: [
-
                   CircleAvatar(
                     radius: 24,
                     backgroundColor: Color(0xffffedc9),
@@ -80,13 +75,10 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   SizedBox(width: 10),
-
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
                       Text(
                         "Hamza Raza",
                         style: TextStyle(
@@ -95,9 +87,7 @@ class ProfileScreen extends StatelessWidget {
                           color: AppColors.textColor,
                         ),
                       ),
-
                       SizedBox(height: 3),
-
                       Text(
                         "hamza.raza@example.com",
                         style: TextStyle(
@@ -105,9 +95,7 @@ class ProfileScreen extends StatelessWidget {
                           color: AppColors.greyColor,
                         ),
                       ),
-
                       SizedBox(height: 4),
-
                       Container(
                         padding: EdgeInsets.symmetric(
                           horizontal: 8,
@@ -129,10 +117,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ],
               ),
-
               SizedBox(height: 16),
-
-              // Bio
               Text(
                 "Bio",
                 style: TextStyle(
@@ -141,9 +126,7 @@ class ProfileScreen extends StatelessWidget {
                   color: AppColors.textColor,
                 ),
               ),
-
               SizedBox(height: 5),
-
               Text(
                 "Final-year CS student building Flutter apps on Firebase. "
                 "I like small, useful tools for local businesses and student groups.",
@@ -153,10 +136,7 @@ class ProfileScreen extends StatelessWidget {
                   color: AppColors.textColor,
                 ),
               ),
-
               SizedBox(height: 16),
-
-              // Skills
               Text(
                 "Skills",
                 style: TextStyle(
@@ -165,14 +145,11 @@ class ProfileScreen extends StatelessWidget {
                   color: AppColors.textColor,
                 ),
               ),
-
               SizedBox(height: 7),
-
               Wrap(
                 spacing: 6,
                 runSpacing: 6,
                 children: [
-
                   skillButton("Flutter"),
                   skillButton("Dart"),
                   skillButton("Firebase"),
@@ -181,10 +158,7 @@ class ProfileScreen extends StatelessWidget {
                   skillButton("Git"),
                 ],
               ),
-
               SizedBox(height: 16),
-
-              // GitHub
               Text(
                 "GitHub",
                 style: TextStyle(
@@ -193,9 +167,7 @@ class ProfileScreen extends StatelessWidget {
                   color: AppColors.textColor,
                 ),
               ),
-
               SizedBox(height: 7),
-
               Container(
                 padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
@@ -205,18 +177,14 @@ class ProfileScreen extends StatelessWidget {
                     color: AppColors.borderColor,
                   ),
                 ),
-
                 child: Row(
                   children: [
-
                     Icon(
                       Icons.code,
                       size: 16,
                       color: AppColors.primaryColor,
                     ),
-
                     SizedBox(width: 8),
-
                     Expanded(
                       child: Text(
                         "github.com/hamza-r",
@@ -227,7 +195,6 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-
                     Icon(
                       Icons.arrow_forward_ios,
                       size: 12,
@@ -236,9 +203,7 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
               ),
-
               SizedBox(height: 7),
-
               Text(
                 "Clients open this link from your proposals to judge your work.",
                 style: TextStyle(
@@ -246,26 +211,33 @@ class ProfileScreen extends StatelessWidget {
                   color: AppColors.greyColor,
                 ),
               ),
-
               Spacer(),
-
-              // Logout Button
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(vertical: 12),
-                decoration: BoxDecoration(
-                  color: AppColors.whiteColor,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: AppColors.borderColor),
-                ),
-
-                child: Center(
-                  child: Text(
-                    "Log out",
-                    style: TextStyle(
-                      fontSize: 11,
-                      color: Colors.red,
-                      fontWeight: FontWeight.w500,
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(),
+                    ),
+                    (route) => false,
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(vertical: 12),
+                  decoration: BoxDecoration(
+                    color: AppColors.whiteColor,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: AppColors.borderColor),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Log out",
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.red,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ),
@@ -274,17 +246,42 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: DeveloperNavbar(
+        selectedIndex: 3,
+        onItemTap: (index) {
+          if (index == 0) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const DashboardScreen(),
+              ),
+            );
+          } else if (index == 1) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const BrowseProjects(),
+              ),
+            );
+          } else if (index == 2) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const MyApplications(),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 
-  // Skill Button
   Widget skillButton(String title) {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 12,
         vertical: 6,
       ),
-
       decoration: BoxDecoration(
         color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(20),
@@ -292,7 +289,6 @@ class ProfileScreen extends StatelessWidget {
           color: AppColors.borderColor,
         ),
       ),
-
       child: Text(
         title,
         style: TextStyle(

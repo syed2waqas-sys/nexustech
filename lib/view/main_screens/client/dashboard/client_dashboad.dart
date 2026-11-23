@@ -1,7 +1,12 @@
+
 import 'package:flutter/material.dart';
 import 'package:nexustech/utils/app_colors.dart';
 import 'package:nexustech/view/main_screens/client/projects/my_projects_screen.dart';
+import 'package:nexustech/view/main_screens/client/proposals/received_proposal_screen.dart';
+import 'package:nexustech/view/main_screens/profile/client_profile_screen.dart';
 import 'package:nexustech/widgets/custom_button.dart';
+import 'package:nexustech/widgets/client_navbar.dart';
+
 
 class ClientHomeScreen extends StatefulWidget {
   const ClientHomeScreen({super.key});
@@ -11,7 +16,6 @@ class ClientHomeScreen extends StatefulWidget {
 }
 
 class _ClientHomeScreenState extends State<ClientHomeScreen> {
-  // Colors
   final Color backgroundColor = const Color(0xFFF7F6F2);
   final Color primaryColor = const Color(0xFF3535D5);
   final Color borderColor = const Color(0xFFE5E3DE);
@@ -20,38 +24,29 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16),
-
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Header
                 _header(),
 
                 const SizedBox(height: 20),
 
-                // Statistics
                 Row(
                   children: [
                     Expanded(child: _statCard('2', 'Open')),
-
                     const SizedBox(width: 10),
-
                     Expanded(child: _statCard('1', 'In progress')),
-
                     const SizedBox(width: 10),
-
                     Expanded(child: _statCard('4', 'Completed')),
                   ],
                 ),
 
                 const SizedBox(height: 24),
 
-                // My Projects Heading
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
@@ -62,7 +57,6 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
                     Text(
                       'See all',
                       style: TextStyle(
@@ -76,7 +70,6 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
 
                 const SizedBox(height: 14),
 
-                // Project 1
                 _projectCard(
                   status: 'Open',
                   statusColor: const Color(0xFFE8E9FF),
@@ -90,7 +83,6 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
 
                 const SizedBox(height: 12),
 
-                // Project 2
                 _projectCard(
                   status: 'In Progress',
                   statusColor: const Color(0xFFDDF2FF),
@@ -104,7 +96,6 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
 
                 const SizedBox(height: 12),
 
-                // Project 3
                 _projectCard(
                   status: 'Completed',
                   statusColor: const Color(0xFFDDF5E6),
@@ -118,7 +109,6 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
 
                 const SizedBox(height: 35),
 
-                // Post Project Button
                 Align(
                   alignment: Alignment.centerRight,
                   child: SizedBox(
@@ -131,7 +121,6 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
                       borderRadius: 25,
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
-
                       onButtonTap: () {
                         Navigator.push(
                           context,
@@ -148,10 +137,36 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: ClientNavbar(
+        selectedIndex: 0,
+        onItemTap: (index) {
+          if (index == 1) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Project_Screen(),
+              ),
+            );
+          } else if (index == 2) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProposalsScreen(),
+              ),
+            );
+          } else if (index == 3) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ClientProfileScreen(),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 
-  // Header
   Widget _header() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -163,18 +178,15 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
               'Good morning',
               style: TextStyle(fontSize: 12, color: Colors.grey),
             ),
-
             Text(
               'Ayesha Khan',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
           ],
         ),
-
         const CircleAvatar(
           radius: 20,
           backgroundColor: Color(0xFFE9E9FF),
-
           child: Text(
             'AK',
             style: TextStyle(
@@ -187,32 +199,33 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
     );
   }
 
-  // Statistics Card
   Widget _statCard(String number, String title) {
     return Container(
       padding: const EdgeInsets.all(10),
-
       decoration: BoxDecoration(
         color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: borderColor),
       ),
-
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             number,
-            style: const TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              fontSize: 21,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-
-          Text(title, style: const TextStyle(fontSize: 11, color: Colors.grey)),
+          Text(
+            title,
+            style: const TextStyle(fontSize: 11, color: Colors.grey),
+          ),
         ],
       ),
     );
   }
 
-  // Project Card
   Widget _projectCard({
     required String status,
     required Color statusColor,
@@ -226,28 +239,26 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(12),
-
       decoration: BoxDecoration(
         color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: borderColor),
       ),
-
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Status and Date
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
-
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 9,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: statusColor,
                   borderRadius: BorderRadius.circular(20),
                 ),
-
                 child: Text(
                   status,
                   style: TextStyle(
@@ -257,7 +268,6 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
                   ),
                 ),
               ),
-
               Text(
                 date,
                 style: const TextStyle(fontSize: 10, color: Colors.grey),
@@ -267,15 +277,16 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
 
           const SizedBox(height: 12),
 
-          // Project Title
           Text(
             title,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
           ),
 
           const SizedBox(height: 10),
 
-          // Project Details
           Row(
             children: [
               Expanded(
@@ -284,7 +295,6 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
                   style: const TextStyle(fontSize: 10, color: Colors.grey),
                 ),
               ),
-
               Text(
                 price,
                 style: const TextStyle(
@@ -292,9 +302,7 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
               const SizedBox(width: 10),
-
               Text(
                 extra,
                 style: const TextStyle(fontSize: 10, color: Colors.grey),
