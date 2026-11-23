@@ -1,4 +1,6 @@
+//import 'package:nexustech/service/firebase_auth_services.dart';
 import 'package:flutter/material.dart';
+import 'package:nexustech/services/firebase/firebase_auth_services.dart';
 import 'package:nexustech/utils/app_assets.dart';
 import 'package:nexustech/utils/app_colors.dart';
 import 'package:nexustech/view/auth/login.dart';
@@ -16,6 +18,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   // Which role is selected: "client" or "developer"
   String selectedRole = "client";
+  bool isLoading = false; 
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -162,12 +165,60 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: 52,
                 borderRadius: 14,
                 fontWeight: FontWeight.bold,
-                onButtonTap: () {
+                /*onButtonTap: () {
+
                   // TODO: add sign up logic here
                   print("Role: $selectedRole");
                   print("Name: ${nameController.text}");
                   print("Email: ${emailController.text}");
-                },
+                },*/
+
+                 // FIREBASE SIGNUP AUTHENTICATION
+  /*onButtonTap: () {
+    FirebaseAuthServices().signupWithEmailAndPassword(
+      name: nameController.text,
+      emailAddress: emailController.text,
+      password: passwordController.text,
+      role: selectedRole,
+    );
+  },*/
+
+  onButtonTap: () async {
+  if (isLoading) return;
+
+  if (nameController.text.trim().isEmpty ||
+      emailController.text.trim().isEmpty ||
+      passwordController.text.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Please fill all fields")),
+    );
+    return;
+  }
+
+  if (passwordController.text.length < 6) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Password must be at least 6 characters"),
+      ),
+    );
+    return;
+  }
+
+  await FirebaseAuthServices().signupWithEmailAndPassword(
+    name: nameController.text.trim(),
+    emailAddress: emailController.text.trim(),
+    password: passwordController.text,
+    role: selectedRole,
+    context: context,
+    setLoading: (value) {
+      if (mounted) {
+        setState(() {
+          isLoading = value;
+        });
+      }
+    },
+  );
+},
               ),
 
               const Spacer(),
