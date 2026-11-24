@@ -415,4 +415,46 @@ class FirebaseAuthServices {
       }
     }
   }
+
+  // FORGOT PASSWORD
+Future<void> forgotPassword({
+  required String emailAddress,
+  required BuildContext context,
+}) async {
+  try {
+    await FirebaseAuth.instance.sendPasswordResetEmail(
+      email: emailAddress.trim(),
+    );
+
+    if (!context.mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Password reset link sent to your email'),
+      ),
+    );
+
+  } on FirebaseAuthException catch (e) {
+    debugPrint('Forgot password error: ${e.code}');
+
+    if (!context.mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(e.message ?? 'Failed to send reset email'),
+      ),
+    );
+
+  } catch (e) {
+    debugPrint('Forgot password error: $e');
+
+    if (!context.mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Something went wrong. Please try again.'),
+      ),
+    );
+  }
+}
 }
