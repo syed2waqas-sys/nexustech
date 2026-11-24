@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:nexustech/utils/app_colors.dart';
 import 'package:nexustech/view/main_screens/client/projects/my_projects_screen.dart';
+import 'package:nexustech/view/main_screens/client/projects/project_detail_screen.dart';
 import 'package:nexustech/view/main_screens/client/proposals/received_proposal_screen.dart';
 import 'package:nexustech/view/main_screens/profile/client_profile_screen.dart';
 import 'package:nexustech/widgets/custom_button.dart';
 import 'package:nexustech/widgets/client_navbar.dart';
-
 
 class ClientHomeScreen extends StatefulWidget {
   const ClientHomeScreen({super.key});
@@ -19,6 +19,48 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
   final Color backgroundColor = const Color(0xFFF7F6F2);
   final Color primaryColor = const Color(0xFF3535D5);
   final Color borderColor = const Color(0xFFE5E3DE);
+
+  final List<Map<String, dynamic>> projects = [
+    {
+      'status': 'Open',
+      'statusColor': const Color(0xFFE8E9FF),
+      'statusTextColor': const Color(0xFF3535D5),
+      'date': 'Posted 2 days ago',
+      'title': 'Inventory tracker for my bakery',
+      'category': 'Mobile app',
+      'price': '\$400 to \$600',
+      'extra': '6 proposals',
+    },
+    {
+      'status': 'In Progress',
+      'statusColor': const Color(0xFFDDF2FF),
+      'statusTextColor': const Color(0xFF1682B8),
+      'date': 'Started 5 days ago',
+      'title': 'Portfolio site for photography students',
+      'category': 'Web development',
+      'price': '\$250',
+      'extra': 'with Hamza R.',
+    },
+    {
+      'status': 'Completed',
+      'statusColor': const Color(0xFFDDF5E6),
+      'statusTextColor': const Color(0xFF21834C),
+      'date': 'Closed 3 weeks ago',
+      'title': 'Landing page for the society fest',
+      'category': 'UI/UX design',
+      'price': '\$120',
+      'extra': 'with Sana M.',
+    },
+  ];
+
+  int get openCount =>
+      projects.where((project) => project['status'] == 'Open').length;
+
+  int get inProgressCount =>
+      projects.where((project) => project['status'] == 'In Progress').length;
+
+  int get completedCount =>
+      projects.where((project) => project['status'] == 'Completed').length;
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +79,15 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
 
                 Row(
                   children: [
-                    Expanded(child: _statCard('2', 'Open')),
+                    Expanded(child: _statCard('$openCount', 'Open')),
                     const SizedBox(width: 10),
-                    Expanded(child: _statCard('1', 'In progress')),
+                    Expanded(
+                      child: _statCard('$inProgressCount', 'In progress'),
+                    ),
                     const SizedBox(width: 10),
-                    Expanded(child: _statCard('4', 'Completed')),
+                    Expanded(
+                      child: _statCard('$completedCount', 'Completed'),
+                    ),
                   ],
                 ),
 
@@ -70,42 +116,28 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
 
                 const SizedBox(height: 14),
 
-                _projectCard(
-                  status: 'Open',
-                  statusColor: const Color(0xFFE8E9FF),
-                  statusTextColor: const Color(0xFF3535D5),
-                  date: 'Posted 2 days ago',
-                  title: 'Inventory tracker for my bakery',
-                  category: 'Mobile app',
-                  price: '\$400 to \$600',
-                  extra: '6 proposals',
-                ),
-
-                const SizedBox(height: 12),
-
-                _projectCard(
-                  status: 'In Progress',
-                  statusColor: const Color(0xFFDDF2FF),
-                  statusTextColor: const Color(0xFF1682B8),
-                  date: 'Started 5 days ago',
-                  title: 'Portfolio site for photography students',
-                  category: 'Web development',
-                  price: '\$250',
-                  extra: 'with Hamza R.',
-                ),
-
-                const SizedBox(height: 12),
-
-                _projectCard(
-                  status: 'Completed',
-                  statusColor: const Color(0xFFDDF5E6),
-                  statusTextColor: const Color(0xFF21834C),
-                  date: 'Closed 3 weeks ago',
-                  title: 'Landing page for the society fest',
-                  category: 'UI/UX design',
-                  price: '\$120',
-                  extra: 'with Sana M.',
-                ),
+                for (int i = 0; i < projects.length; i++) ...[
+                  _projectCard(
+                    status: projects[i]['status'],
+                    statusColor: projects[i]['statusColor'],
+                    statusTextColor: projects[i]['statusTextColor'],
+                    date: projects[i]['date'],
+                    title: projects[i]['title'],
+                    category: projects[i]['category'],
+                    price: projects[i]['price'],
+                    extra: projects[i]['extra'],
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ProjectDetailScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  if (i != projects.length - 1)
+                    const SizedBox(height: 12),
+                ],
 
                 const SizedBox(height: 35),
 
@@ -235,81 +267,85 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
     required String category,
     required String price,
     required String extra,
+    required VoidCallback onTap,
   }) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: AppColors.whiteColor,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: borderColor),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 9,
-                  vertical: 4,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: AppColors.whiteColor,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: borderColor),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 9,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: statusColor,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    status,
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: statusTextColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-                decoration: BoxDecoration(
-                  color: statusColor,
-                  borderRadius: BorderRadius.circular(20),
+                Text(
+                  date,
+                  style: const TextStyle(fontSize: 10, color: Colors.grey),
                 ),
-                child: Text(
-                  status,
-                  style: TextStyle(
+              ],
+            ),
+
+            const SizedBox(height: 12),
+
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    category,
+                    style: const TextStyle(fontSize: 10, color: Colors.grey),
+                  ),
+                ),
+                Text(
+                  price,
+                  style: const TextStyle(
                     fontSize: 10,
-                    color: statusTextColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-              Text(
-                date,
-                style: const TextStyle(fontSize: 10, color: Colors.grey),
-              ),
-            ],
-          ),
-
-          const SizedBox(height: 12),
-
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-
-          const SizedBox(height: 10),
-
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  category,
+                const SizedBox(width: 10),
+                Text(
+                  extra,
                   style: const TextStyle(fontSize: 10, color: Colors.grey),
                 ),
-              ),
-              Text(
-                price,
-                style: const TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(width: 10),
-              Text(
-                extra,
-                style: const TextStyle(fontSize: 10, color: Colors.grey),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

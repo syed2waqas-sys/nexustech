@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:nexustech/utils/app_colors.dart';
 import 'package:nexustech/view/main_screens/client/dashboard/client_dashboad.dart';
@@ -6,18 +7,51 @@ import 'package:nexustech/view/main_screens/client/proposals/received_proposal_s
 import 'package:nexustech/widgets/custom_button.dart';
 
 class ProjectDetailScreen extends StatefulWidget {
-  const ProjectDetailScreen({super.key});
+  final Map<String, dynamic>? project;
+
+  const ProjectDetailScreen({super.key, this.project});
 
   @override
   State<ProjectDetailScreen> createState() => _ProjectDetailScreenState();
 }
 
 class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
+  late Map<String, dynamic> project;
+
+  @override
+  void initState() {
+    super.initState();
+
+    project = widget.project ?? {
+      'title': 'Inventory tracker for my bakery',
+      'status': 'Open',
+      'posted': 'Posted 2 days ago by you',
+      'budgetFrom': 400,
+      'budgetTo': 600,
+      'category': 'Mobile app',
+      'proposals': 6,
+      'description':
+          'I run a small bakery and want a simple app to log daily stock, flag items running low, and see what sold best each week. Android first, iOS later.',
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
+    final String status = project['status'] ?? 'Open';
+    final String title = project['title'] ?? '';
+    final String posted = project['posted'] ?? 'Posted 2 days ago by you';
+    final String category = project['category'] ?? 'Mobile app';
+    final int proposals = project['proposals'] ?? 6;
+    final String description = project['description'] ??
+        'I run a small bakery and want a simple app to log daily stock, flag items running low, and see what sold best each week. Android first, iOS later.';
+
+    final String budgetFrom =
+        project['budgetFrom']?.toString() ?? '400';
+    final String budgetTo =
+        project['budgetTo']?.toString() ?? '600';
+
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -34,18 +68,42 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                       },
                       child: const Icon(Icons.arrow_back_ios),
                     ),
-
                     InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Project_Screen(),
+                      onTap: status == 'Closed'
+                          ? null
+                          : () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      Project_Screen(project: project),
+                                ),
+                              ).then((updatedProject) {
+                                if (updatedProject != null &&
+                                    updatedProject is Map<String, dynamic>) {
+                                  setState(() {
+                                    project = updatedProject;
+                                  });
+                                }
+                              });
+                            },
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.edit,
+                            color: status == 'Closed'
+                                ? Colors.grey
+                                : Colors.black,
                           ),
-                        );
-                      },
-                      child: const Row(
-                        children: [Icon(Icons.edit), Text("edit")],
+                          Text(
+                            "edit",
+                            style: TextStyle(
+                              color: status == 'Closed'
+                                  ? Colors.grey
+                                  : Colors.black,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -59,47 +117,58 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE8E9FF),
+                    color: status == 'Closed'
+                        ? Colors.grey.shade200
+                        : const Color(0xFFE8E9FF),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Text("Open"),
+                  child: Text(status),
                 ),
 
                 const SizedBox(height: 10),
 
-                const Text(
-                  "Inventory tracker\nfor my bakery",
-                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
 
                 const SizedBox(height: 10),
 
-                const Text(
-                  "Posted 2 days ago by you",
-                  style: TextStyle(color: Colors.grey),
+                Text(
+                  posted,
+                  style: const TextStyle(color: Colors.grey),
                 ),
 
                 const SizedBox(height: 10),
 
                 Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: StatCard(
                         title: "Budget",
-                        value: "\$400 to\n\$600",
+                        value: "\$$budgetFrom to\n\$$budgetTo",
                       ),
                     ),
 
                     const SizedBox(width: 8),
 
-                    const Expanded(
-                      child: StatCard(title: "Category", value: "Mobile app"),
+                    Expanded(
+                      child: StatCard(
+                        title: "Category",
+                        value: category,
+                      ),
                     ),
 
                     const SizedBox(width: 8),
 
-                    const Expanded(
-                      child: StatCard(title: "Proposals", value: "6 received"),
+                    Expanded(
+                      child: StatCard(
+                        title: "Proposals",
+                        value: "$proposals received",
+                      ),
                     ),
                   ],
                 ),
@@ -108,13 +177,28 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
 
                 const Text(
                   "About this project",
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
 
                 const SizedBox(height: 8),
 
-                const Text(
-                  "I run a small bakery and want a simple app to log daily stock, flag items running low, and see what sold best each week. Android first, iOS later.",
+                Text(description),
+
+                const SizedBox(height: 15),
+
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE8E9FF),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Text(
+                    "When you accept one proposal, all other proposals will automatically be rejected.",
+                  ),
                 ),
               ],
             ),
@@ -132,17 +216,20 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                 width: double.infinity,
                 child: CustomButton(
                   buttonColor: Colors.blue,
-                  buttonText: "Review 6 proposals",
+                  buttonText: "Review $proposals proposals",
                   textColor: Colors.white,
                   fontWeight: FontWeight.bold,
-                  onButtonTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ProposalsScreen(),
-                      ),
-                    );
-                  },
+                  onButtonTap: status == 'Closed'
+                      ? null
+                      : () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const ProposalsScreen(),
+                            ),
+                          );
+                        },
                 ),
               ),
 
@@ -151,18 +238,18 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
               SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  onPressed: () {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ClientHomeScreen(),
-                      ),
-                      (route) => false,
-                    );
-                  },
-                  child: const Text(
-                    "Close Project",
-                    style: TextStyle(color: Colors.red),
+                  onPressed: status == 'Closed'
+                      ? null
+                      : () {
+                          setState(() {
+                            project['status'] = 'Closed';
+                          });
+
+                          Navigator.pop(context);
+                        },
+                  child: Text(
+                    status == 'Closed' ? "Project Closed" : "Close Project",
+                    style: const TextStyle(color: Colors.red),
                   ),
                 ),
               ),
@@ -194,7 +281,11 @@ class StatCard extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [Text(title), const SizedBox(height: 8), Text(value)],
+        children: [
+          Text(title),
+          const SizedBox(height: 8),
+          Text(value),
+        ],
       ),
     );
   }
