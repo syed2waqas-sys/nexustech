@@ -227,6 +227,7 @@ class _Project_ScreenState extends State<Project_Screen> {
                   ],
                 ),
                 const SizedBox(height: 20),
+                
                 CustomButton(
                   buttonColor: AppColors.primaryColor,
                   buttonText: isEditing ? "Save changes" : "Publish project",
