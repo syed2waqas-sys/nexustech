@@ -1,6 +1,9 @@
+
+//import 'package:nexustech/service/firebase_auth_services.dart';
 import 'package:nexustech/services/firebase/firebase_auth_services.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:nexustech/services/firebase_services/firebase_auth_services.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nexustech/utils/app_assets.dart';
 import 'package:nexustech/utils/app_colors.dart';
 import 'package:nexustech/view/auth/forget_password.dart';
@@ -158,15 +161,38 @@ class _LoginScreenState extends State<LoginScreen> {
   );
                 }*/
 
-  onButtonTap: () {
+  /*onButtonTap: () {
     FirebaseAuthServices().loginWithEmailAndPassword(
       emailAddress: emailController.text,
       password: passwordController.text,
       context: context,
     );
   },
+*/
+  onButtonTap: () async {
+  if (isLoading) return;
 
-  
+  if (emailController.text.trim().isEmpty ||
+      passwordController.text.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Please fill all fields')),
+    );
+    return;
+  }
+
+  await FirebaseAuthServices().loginWithEmailAndPassword(
+    emailAddress: emailController.text.trim(),
+    password: passwordController.text,
+    context: context,
+    setLoading: (value) {
+      if (mounted) {
+        setState(() {
+          isLoading = value;
+        });
+      }
+    },
+  );
+},
 
               ),
 

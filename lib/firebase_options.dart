@@ -41,48 +41,48 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB9pX6AQlP_x-GYbdLDPpJZDoT1EOje7jE',
-    appId: '1:532908347954:web:40df8774fb3df8e2ebe22b',
-    messagingSenderId: '532908347954',
-    projectId: 'nexustech-29e38',
-    authDomain: 'nexustech-29e38.firebaseapp.com',
-    storageBucket: 'nexustech-29e38.firebasestorage.app',
-    measurementId: 'G-3E07JZS22E',
+    apiKey: 'AIzaSyAmzOLYZNtUAV04fBYSbFdB_JTBpf8Tvjg',
+    appId: '1:779528382746:web:6e7024109423110b20a4a3',
+    messagingSenderId: '779528382746',
+    projectId: 'nexustech-e3236',
+    authDomain: 'nexustech-e3236.firebaseapp.com',
+    storageBucket: 'nexustech-e3236.firebasestorage.app',
+    measurementId: 'G-SG6YZX97QW',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA3LovsCsZbeepfdFQPF0G4oZyrAGMY3FI',
-    appId: '1:532908347954:android:36db8879f5ea54ebebe22b',
-    messagingSenderId: '532908347954',
-    projectId: 'nexustech-29e38',
-    storageBucket: 'nexustech-29e38.firebasestorage.app',
+    apiKey: 'AIzaSyB7A-bEY8nl9o-1sf7fAx2VaecKTj0JsSg',
+    appId: '1:779528382746:android:9dd4f4c3731b6af920a4a3',
+    messagingSenderId: '779528382746',
+    projectId: 'nexustech-e3236',
+    storageBucket: 'nexustech-e3236.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA7dVd1fWTXfpZVkiRRVQtV6y-ehDvivsQ',
-    appId: '1:532908347954:ios:f97ea3fec07b7b61ebe22b',
-    messagingSenderId: '532908347954',
-    projectId: 'nexustech-29e38',
-    storageBucket: 'nexustech-29e38.firebasestorage.app',
+    apiKey: 'AIzaSyArUxESNJjmhs9Jd9zqWg1EImUpP5VKlDc',
+    appId: '1:779528382746:ios:b4de517cd912169020a4a3',
+    messagingSenderId: '779528382746',
+    projectId: 'nexustech-e3236',
+    storageBucket: 'nexustech-e3236.firebasestorage.app',
     iosBundleId: 'com.example.nexustech',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyA7dVd1fWTXfpZVkiRRVQtV6y-ehDvivsQ',
-    appId: '1:532908347954:ios:f97ea3fec07b7b61ebe22b',
-    messagingSenderId: '532908347954',
-    projectId: 'nexustech-29e38',
-    storageBucket: 'nexustech-29e38.firebasestorage.app',
+    apiKey: 'AIzaSyArUxESNJjmhs9Jd9zqWg1EImUpP5VKlDc',
+    appId: '1:779528382746:ios:b4de517cd912169020a4a3',
+    messagingSenderId: '779528382746',
+    projectId: 'nexustech-e3236',
+    storageBucket: 'nexustech-e3236.firebasestorage.app',
     iosBundleId: 'com.example.nexustech',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyB9pX6AQlP_x-GYbdLDPpJZDoT1EOje7jE',
-    appId: '1:532908347954:web:8d99688c286b5647ebe22b',
-    messagingSenderId: '532908347954',
-    projectId: 'nexustech-29e38',
-    authDomain: 'nexustech-29e38.firebaseapp.com',
-    storageBucket: 'nexustech-29e38.firebasestorage.app',
-    measurementId: 'G-31B2PSZ8X9',
+    apiKey: 'AIzaSyAmzOLYZNtUAV04fBYSbFdB_JTBpf8Tvjg',
+    appId: '1:779528382746:web:2f907069cdf09e8320a4a3',
+    messagingSenderId: '779528382746',
+    projectId: 'nexustech-e3236',
+    authDomain: 'nexustech-e3236.firebaseapp.com',
+    storageBucket: 'nexustech-e3236.firebasestorage.app',
+    measurementId: 'G-BE6KJDD6ZD',
   );
 }

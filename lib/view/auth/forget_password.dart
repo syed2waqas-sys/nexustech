@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:nexustech/services/firebase/firebase_auth_services.dart';
 import 'package:nexustech/utils/app_colors.dart';
 
 import 'package:nexustech/widgets/custom_button.dart';
 import 'package:nexustech/widgets/custom_textfield.dart';
+
+//bject of your FirebaseAuthServices class so you can call its methods from your Forgot Password screen.
+final authServices = FirebaseAuthServices();
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -107,12 +111,32 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 height: 52,
                 borderRadius: 14,
                 fontWeight: FontWeight.bold,
-                onButtonTap: () {
+                /*onButtonTap: () {
                   
                   setState(() {
                     linkSent = true;
                   });
                 },
+                */
+                onButtonTap: () async {
+  if (emailController.text.trim().isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Please enter your email')),
+    );
+    return;
+  }
+
+  await authServices.forgotPassword(
+    emailAddress: emailController.text,
+    context: context,
+  );
+
+  if (!mounted) return;
+
+  setState(() {
+    linkSent = true;
+  });
+},
               ),
 
               const Spacer(),
