@@ -200,28 +200,8 @@ class FirebaseAuthServices {
   }
 }*/
 
-class FirebaseAuthServices {
-  // SIGNUP WITH FIREBASE AUTHENTICATION + FIRESTORE
-  Future<UserCredential?> signupWithEmailAndPassword({
-    required String name,
-    required String emailAddress,
-    required String password,
-    required String role,
-    required BuildContext context,
-    required Function(bool) setLoading,
-  }) async {
-    try {
-      setLoading(true);
 
-      // Create account in Firebase Authentication
-      final credential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-        email: emailAddress,
-        password: password,
-      );
 
-      // Get user's UID
-      final uid = credential.user!.uid;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';

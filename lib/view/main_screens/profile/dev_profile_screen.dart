@@ -68,7 +68,7 @@ class ProfileScreen extends StatelessWidget {
                     radius: 24,
                     backgroundColor: Color(0xffffedc9),
                     child: Text(
-                      "HR",
+                      "NS",
                       style: TextStyle(
                         color: Colors.brown,
                         fontWeight: FontWeight.bold,
@@ -80,7 +80,7 @@ class ProfileScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Hamza Raza",
+                        "Nimra Siddiqui",
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -187,7 +187,7 @@ class ProfileScreen extends StatelessWidget {
                     SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        "github.com/hamza-r",
+                        "github.com/Nimra-S",
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w500,
