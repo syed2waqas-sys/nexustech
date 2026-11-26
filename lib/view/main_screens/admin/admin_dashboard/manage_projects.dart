@@ -585,6 +585,7 @@ class _ManageProjectsState extends State<ManageProjects> {
     );
   }
 
+/*
   // Project Card
   Widget projectCard(
       Map<String, String> project, String documentId) {
@@ -642,7 +643,69 @@ class _ManageProjectsState extends State<ManageProjects> {
       ),
     );
   }
+*/
 
+
+// Project Card
+Widget projectCard(Map<String, String> project, String documentId) {
+  return Container(
+    margin: const EdgeInsets.only(bottom: 10),
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+      color: AppColors.whiteColor,
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(
+        color: AppColors.borderColor,
+      ),
+    ),
+    child: Row(
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                project['title'] ?? 'Untitled project',
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textColor,
+                ),
+              ),
+
+              const SizedBox(height: 8),
+
+              Row(
+                children: [
+                  statusBadge(project['status'] ?? 'Open'),
+                  const SizedBox(width: 8),
+
+                  Text(
+                    'by ${project['owner'] ?? 'Unknown'}',
+                    style: const TextStyle(
+                      fontSize: 11,
+                      color: AppColors.greyColor,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+
+        GestureDetector(
+          onTap: () {
+            deleteProject(documentId);
+          },
+          child: const Icon(
+            Icons.delete_outline,
+            color: Colors.red,
+          ),
+        ),
+      ],
+    ),
+  );
+}
   // Status Badge
   Widget statusBadge(String status) {
     Color badgeColor;
