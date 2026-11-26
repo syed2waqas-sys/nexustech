@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:nexustech/utils/app_colors.dart';
-import 'package:nexustech/view/main_screens/client/projects/my_projects_screen.dart';
 import 'package:nexustech/view/main_screens/client/projects/project_detail_screen.dart';
+import 'package:nexustech/view/main_screens/client/projects/my_projects_screen.dart';
+import 'package:nexustech/view/main_screens/client/projects/client_projects_data.dart';
 import 'package:nexustech/view/main_screens/client/proposals/received_proposal_screen.dart';
 import 'package:nexustech/view/main_screens/profile/client_profile_screen.dart';
 import 'package:nexustech/widgets/custom_button.dart';
@@ -20,47 +20,14 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
   final Color primaryColor = const Color(0xFF3535D5);
   final Color borderColor = const Color(0xFFE5E3DE);
 
-  final List<Map<String, dynamic>> projects = [
-    {
-      'status': 'Open',
-      'statusColor': const Color(0xFFE8E9FF),
-      'statusTextColor': const Color(0xFF3535D5),
-      'date': 'Posted 2 days ago',
-      'title': 'Inventory tracker for my bakery',
-      'category': 'Mobile app',
-      'price': '\$400 to \$600',
-      'extra': '6 proposals',
-    },
-    {
-      'status': 'In Progress',
-      'statusColor': const Color(0xFFDDF2FF),
-      'statusTextColor': const Color(0xFF1682B8),
-      'date': 'Started 5 days ago',
-      'title': 'Portfolio site for photography students',
-      'category': 'Web development',
-      'price': '\$250',
-      'extra': 'with Hamza R.',
-    },
-    {
-      'status': 'Completed',
-      'statusColor': const Color(0xFFDDF5E6),
-      'statusTextColor': const Color(0xFF21834C),
-      'date': 'Closed 3 weeks ago',
-      'title': 'Landing page for the society fest',
-      'category': 'UI/UX design',
-      'price': '\$120',
-      'extra': 'with Sana M.',
-    },
-  ];
-
-  int get openCount =>
-      projects.where((project) => project['status'] == 'Open').length;
-
-  int get inProgressCount =>
-      projects.where((project) => project['status'] == 'In Progress').length;
-
-  int get completedCount =>
-      projects.where((project) => project['status'] == 'Completed').length;
+  void openPostScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const Project_Screen(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,67 +44,112 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
 
                 const SizedBox(height: 20),
 
-                Row(
-                  children: [
-                    Expanded(child: _statCard('$openCount', 'Open')),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: _statCard('$inProgressCount', 'In progress'),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: _statCard('$completedCount', 'Completed'),
-                    ),
-                  ],
-                ),
+                ValueListenableBuilder<List<Map<String, dynamic>>>(
+                  valueListenable: ClientProjectsData.projects,
+                  builder: (context, projects, child) {
+                    final openCount = projects
+                        .where((project) => project['status'] == 'Open')
+                        .length;
 
-                const SizedBox(height: 24),
+                    final inProgressCount = projects
+                        .where((project) => project['status'] == 'In Progress')
+                        .length;
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text(
-                      'My projects',
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'See all',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Color(0xFF3535D5),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
+                    final completedCount = projects
+                        .where((project) => project['status'] == 'Completed')
+                        .length;
 
-                const SizedBox(height: 14),
-
-                for (int i = 0; i < projects.length; i++) ...[
-                  _projectCard(
-                    status: projects[i]['status'],
-                    statusColor: projects[i]['statusColor'],
-                    statusTextColor: projects[i]['statusTextColor'],
-                    date: projects[i]['date'],
-                    title: projects[i]['title'],
-                    category: projects[i]['category'],
-                    price: projects[i]['price'],
-                    extra: projects[i]['extra'],
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ProjectDetailScreen(),
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: _statCard('$openCount', 'Open'),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: _statCard(
+                                '$inProgressCount',
+                                'In progress',
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: _statCard(
+                                '$completedCount',
+                                'Completed',
+                              ),
+                            ),
+                          ],
                         ),
-                      );
-                    },
-                  ),
-                  if (i != projects.length - 1)
-                    const SizedBox(height: 12),
-                ],
+
+                        const SizedBox(height: 24),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              'My projects',
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: openPostScreen,
+                              child: const Text(
+                                'See all',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0xFF3535D5),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 14),
+
+                        for (int i = 0; i < projects.length; i++) ...[
+                          _projectCard(
+                            status: projects[i]['status'] ?? 'Open',
+                            statusColor:
+                                projects[i]['status'] == 'Completed'
+                                    ? const Color(0xFFDDF5E6)
+                                    : projects[i]['status'] == 'In Progress'
+                                        ? const Color(0xFFDDF2FF)
+                                        : const Color(0xFFE8E9FF),
+                            statusTextColor:
+                                projects[i]['status'] == 'Completed'
+                                    ? const Color(0xFF21834C)
+                                    : projects[i]['status'] == 'In Progress'
+                                        ? const Color(0xFF1682B8)
+                                        : const Color(0xFF3535D5),
+                            date: projects[i]['date'] ?? 'Posted just now',
+                            title: projects[i]['title'] ?? '',
+                            category: projects[i]['category'] ?? '',
+                            price: projects[i]['price'] ?? '',
+                            extra: projects[i]['extra'] ?? '',
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProjectDetailScreen(
+                                    project: projects[i],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          if (i != projects.length - 1)
+                            const SizedBox(height: 12),
+                        ],
+                      ],
+                    );
+                  },
+                ),
 
                 const SizedBox(height: 35),
 
@@ -153,14 +165,7 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
                       borderRadius: 25,
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
-                      onButtonTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Project_Screen(),
-                          ),
-                        );
-                      },
+                      onButtonTap: openPostScreen,
                     ),
                   ),
                 ),
@@ -173,12 +178,7 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
         selectedIndex: 0,
         onItemTap: (index) {
           if (index == 1) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Project_Screen(),
-              ),
-            );
+            openPostScreen();
           } else if (index == 2) {
             Navigator.pushReplacement(
               context,
@@ -211,7 +211,7 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
               style: TextStyle(fontSize: 12, color: Colors.grey),
             ),
             Text(
-              'Ayesha Khan',
+              'Syed Waqas',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
           ],
@@ -220,7 +220,7 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
           radius: 20,
           backgroundColor: Color(0xFFE9E9FF),
           child: Text(
-            'AK',
+            'SW',
             style: TextStyle(
               color: Color(0xFF3535D5),
               fontWeight: FontWeight.bold,
@@ -305,7 +305,10 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
                 ),
                 Text(
                   date,
-                  style: const TextStyle(fontSize: 10, color: Colors.grey),
+                  style: const TextStyle(
+                    fontSize: 10,
+                    color: Colors.grey,
+                  ),
                 ),
               ],
             ),
@@ -327,7 +330,10 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
                 Expanded(
                   child: Text(
                     category,
-                    style: const TextStyle(fontSize: 10, color: Colors.grey),
+                    style: const TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey,
+                    ),
                   ),
                 ),
                 Text(
@@ -340,7 +346,10 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
                 const SizedBox(width: 10),
                 Text(
                   extra,
-                  style: const TextStyle(fontSize: 10, color: Colors.grey),
+                  style: const TextStyle(
+                    fontSize: 10,
+                    color: Colors.grey,
+                  ),
                 ),
               ],
             ),

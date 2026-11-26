@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:nexustech/utils/app_colors.dart';
 import 'package:nexustech/view/main_screens/client/projects/project_detail_screen.dart';
+import 'package:nexustech/view/main_screens/client/projects/client_projects_data.dart';
 import 'package:nexustech/widgets/custom_button.dart';
 import 'package:nexustech/widgets/custom_textfield.dart';
 
@@ -103,6 +103,8 @@ class _Project_ScreenState extends State<Project_Screen> {
     if (isEditing) {
       Navigator.pop(context, projectData);
     } else {
+      ClientProjectsData.addProject(projectData);
+
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -227,7 +229,6 @@ class _Project_ScreenState extends State<Project_Screen> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                
                 CustomButton(
                   buttonColor: AppColors.primaryColor,
                   buttonText: isEditing ? "Save changes" : "Publish project",

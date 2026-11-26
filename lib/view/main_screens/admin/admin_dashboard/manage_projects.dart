@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:nexustech/utils/app_colors.dart';
 import 'package:nexustech/view/main_screens/admin/admin_dashboard/manage_users.dart';
+import 'package:nexustech/view/main_screens/admin/admin_dashboard/admin_projects_data.dart';
 import 'package:nexustech/widgets/custom_textfield.dart';
 import 'package:nexustech/widgets/navbar.dart';
 
@@ -13,43 +13,8 @@ class ManageProjects extends StatefulWidget {
 }
 
 class _ManageProjectsState extends State<ManageProjects> {
-  List<Map<String, String>> projects = [
-    {
-      'title': 'Inventory tracker for my bakery',
-      'owner': 'Ayasha Khan',
-      'status': 'Open',
-    },
-    {
-      'title': 'Portfolio site for photography studio',
-      'owner': 'Ayasha Khan',
-      'status': 'In Progress',
-    },
-    {
-      'title': 'Quiz app for a school society',
-      'owner': 'Bilal Ahmed',
-      'status': 'Open',
-    },
-    {
-      'title': 'Landing page for the society fest',
-      'owner': 'Ayasha Khan',
-      'status': 'Completed',
-    },
-    {
-      'title': 'Booking app for a campus gym',
-      'owner': 'Zara Iqbal',
-      'status': 'Closed',
-    },
-    {
-      'title': 'Habit tracker with weekly streaks',
-      'owner': 'Zara Iqbal',
-      'status': 'Open',
-    },
-  ];
-
   void deleteProject(int index) {
-    setState(() {
-      projects.removeAt(index);
-    });
+    AdminProjectsData.deleteProject(index);
   }
 
   @override
@@ -199,11 +164,16 @@ class _ManageProjectsState extends State<ManageProjects> {
 
   // Project List
   Widget projectList() {
-    return ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      itemCount: projects.length,
-      itemBuilder: (context, index) {
-        return projectCard(projects[index], index);
+    return ValueListenableBuilder<List<Map<String, String>>>(
+      valueListenable: AdminProjectsData.projects,
+      builder: (context, projects, child) {
+        return ListView.builder(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          itemCount: projects.length,
+          itemBuilder: (context, index) {
+            return projectCard(projects[index], index);
+          },
+        );
       },
     );
   }

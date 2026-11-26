@@ -17,9 +17,9 @@ class _ProposalsScreenState extends State<ProposalsScreen> {
 
   final List<Map<String, dynamic>> proposals = [
     {
-      "initials": "HR",
-      "name": "Hamza Raza",
-      "github": "github.com/hamza-r",
+      "initials": "NS",
+      "name": "Nimra Siddiqui",
+      "github": "github.com/Nimra-s",
       "price": "\$450",
       "description":
           "I have built two Flutter stock apps for local shops using Firebase. I can ship a working...",

@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:nexustech/utils/app_colors.dart';
 import 'package:nexustech/view/main_screens/admin/admin_dashboard/manage_projects.dart';
+import 'package:nexustech/view/main_screens/admin/admin_dashboard/admin_projects_data.dart';
 import 'package:nexustech/widgets/custom_textfield.dart';
 import 'package:nexustech/widgets/navbar.dart';
 
@@ -156,17 +156,26 @@ class _ManageScreenState extends State<ManageScreen> {
 
   // Statistics
   Widget statsRow() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Row(
-        children: [
-          Expanded(child: statCard('128', 'Users')),
-          const SizedBox(width: 10),
-          Expanded(child: statCard('41', 'Projects')),
-          const SizedBox(width: 10),
-          Expanded(child: statCard('3', 'Blocked')),
-        ],
-      ),
+    int totalUsers = blockedUsers.length;
+    int totalBlocked =
+        blockedUsers.where((isBlocked) => isBlocked).length;
+
+    return ValueListenableBuilder<List<Map<String, String>>>(
+      valueListenable: AdminProjectsData.projects,
+      builder: (context, projects, child) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            children: [
+              Expanded(child: statCard('$totalUsers', 'Users')),
+              const SizedBox(width: 10),
+              Expanded(child: statCard('${projects.length}', 'Projects')),
+              const SizedBox(width: 10),
+              Expanded(child: statCard('$totalBlocked', 'Blocked')),
+            ],
+          ),
+        );
+      },
     );
   }
 

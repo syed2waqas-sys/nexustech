@@ -38,7 +38,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                         ),
                         Text(
-                          "Hamza Raza",
+                          "Syed Waqas",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -49,7 +49,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     CircleAvatar(
                       backgroundColor: Color(0xffffefc9),
                       child: Text(
-                        "HR",
+                        "SW",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.brown,
